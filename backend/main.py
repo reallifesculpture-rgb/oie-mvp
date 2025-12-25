@@ -174,14 +174,28 @@ async def stop_live_trading(symbol: str = None, interval: str = None):
 @app.get("/api/v1/trading/status")
 async def get_trading_status():
     """Returnează statusul tuturor perechilor active"""
-    statuses = {}
+    runners_status = {}
+    total_balance = 0
+
     for key, runner in _runners.items():
-        statuses[key] = runner.get_status()
-    
-    if not statuses:
-        return {"running": False, "message": "No trading sessions active"}
-    
-    return {"timeframes": statuses}
+        status = runner.get_status()
+        runners_status[key] = {
+            "symbol": status.get("symbol"),
+            "interval": status.get("interval"),
+            "bar": status.get("current_bar"),
+            "bars_processed": status.get("bars_processed", 0),
+            "topology": status.get("topology"),
+            "predictive": status.get("predictive"),
+            "signals": status.get("signals", []),
+            "stats": status.get("trading_stats")
+        }
+        if runner.trading_manager and runner.trading_manager.connector:
+            total_balance = runner.trading_manager.connector.balance
+
+    if not runners_status:
+        return {"running": False, "runners": {}, "balance": 0}
+
+    return {"running": True, "runners": runners_status, "balance": total_balance}
 
 # ============================================
 # WEBSOCKET ENDPOINTS

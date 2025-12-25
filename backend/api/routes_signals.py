@@ -7,7 +7,7 @@ from backend.predictive.engine import engine as predictive_engine
 from backend.signals.engine import engine as signals_engine
 from backend.signals.models import Signal
 
-router = APIRouter(prefix="/api/v1/signals", tags=["signals"])
+router = APIRouter(tags=["signals"])
 
 @router.get("/ping")
 def ping() -> dict:
