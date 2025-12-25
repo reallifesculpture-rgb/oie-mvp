@@ -11,6 +11,7 @@ from backend.api.routes_replay import router as replay_router
 from backend.api.routes_topology import router as topology_router
 from backend.api.routes_predictive import router as predictive_router
 from backend.api.routes_signals import router as signals_router
+from backend.api.routes_trades import router as trades_router
 
 from backend.data.replay_engine import engine as replay_engine
 from backend.topology.engine import engine as topology_engine
@@ -34,6 +35,7 @@ app.include_router(replay_router, prefix="/api/v1/replay", tags=["replay"])
 app.include_router(topology_router, prefix="/api/v1/topology", tags=["topology"])
 app.include_router(predictive_router, prefix="/api/v1/predictive", tags=["predictive"])
 app.include_router(signals_router, prefix="/api/v1/signals", tags=["signals"])
+app.include_router(trades_router, prefix="/api/v1/trades", tags=["trades"])
 
 # Live trading runner (lazy import to avoid errors if not configured)
 _live_runner = None

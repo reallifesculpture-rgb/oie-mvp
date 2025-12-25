@@ -12,6 +12,7 @@ Gestionează trading-ul automat bazat pe semnalele OIE.
 import os
 import asyncio
 import logging
+import uuid
 from datetime import datetime
 from typing import Optional, Dict, Any, List
 from dataclasses import dataclass, field
@@ -24,11 +25,12 @@ logger = logging.getLogger(__name__)
 from dotenv import load_dotenv
 
 from backend.trading.binance_connector import (
-    BinanceTestnetConnector, 
+    BinanceTestnetConnector,
     get_connector,
     TradeResult,
     Position
 )
+from backend.services.trade_logger import get_trade_logger, TradeEvent
 
 load_dotenv()
 
@@ -112,18 +114,21 @@ class PaperTradingManager:
     def __init__(self, config: TradingConfig = None):
         self.config = config or TradingConfig()
         self.connector: Optional[BinanceTestnetConnector] = None
-        
+
         self.current_trade: Optional[TradeLog] = None
         self.trade_history: List[TradeLog] = []
-        
+
         self.is_running: bool = False
         self.last_signal_time: Optional[datetime] = None
-        
+
         # Stats
         self.total_trades: int = 0
         self.winning_trades: int = 0
         self.total_pnl: float = 0.0
-        
+
+        # Trade logger for persistent logging
+        self.trade_logger = get_trade_logger()
+
         # Log file
         self.log_dir = Path(__file__).parent.parent.parent / "results" / "paper_trading"
         self.log_dir.mkdir(parents=True, exist_ok=True)
@@ -435,6 +440,21 @@ class PaperTradingManager:
 
             self._log_trade(self.current_trade, "OPENED")
 
+            # Log to persistent trade logger
+            trade_event = TradeEvent(
+                id=str(uuid.uuid4()),
+                ts=datetime.now().isoformat(),
+                symbol=self.config.symbol,
+                timeframe="1m",  # Default, could be passed in
+                side='BUY' if is_long else 'SELL',
+                action='OPEN',
+                qty=quantity,
+                entry_price=actual_entry_price,
+                reason=signal_type,
+                meta={'confidence': confidence, 'order_id': result.order_id}
+            )
+            asyncio.create_task(self.trade_logger.log_event(trade_event))
+
         return result
     
     async def close_current_position(self, reason: str = "manual") -> Optional[TradeResult]:
@@ -471,9 +491,26 @@ class PaperTradingManager:
 
             self.trade_history.append(self.current_trade)
             self._log_trade(self.current_trade, f"CLOSED ({reason})")
-            
+
+            # Log to persistent trade logger
+            close_event = TradeEvent(
+                id=str(uuid.uuid4()),
+                ts=datetime.now().isoformat(),
+                symbol=self.config.symbol,
+                timeframe="1m",
+                side='SELL' if self.current_trade.direction == 'LONG' else 'BUY',
+                action='CLOSE',
+                qty=self.current_trade.quantity,
+                entry_price=entry_price,
+                exit_price=actual_exit_price,
+                pnl=pnl,
+                reason=reason,
+                meta={'order_id': self.current_trade.order_id}
+            )
+            asyncio.create_task(self.trade_logger.log_event(close_event))
+
             self.current_trade = None
-        
+
         return result
     
     async def check_position_status(self):
@@ -510,6 +547,24 @@ class PaperTradingManager:
 
             self.trade_history.append(self.current_trade)
             self._log_trade(self.current_trade, f"CLOSED ({reason})")
+
+            # Log to persistent trade logger
+            action = "TAKE_PROFIT" if reason == "take_profit" else "STOP_LOSS"
+            close_event = TradeEvent(
+                id=str(uuid.uuid4()),
+                ts=datetime.now().isoformat(),
+                symbol=self.config.symbol,
+                timeframe="1m",
+                side='SELL' if self.current_trade.direction == 'LONG' else 'BUY',
+                action=action,
+                qty=self.current_trade.quantity,
+                entry_price=self.current_trade.entry_price,
+                exit_price=current_price,
+                pnl=pnl,
+                reason=reason,
+                meta={'order_id': self.current_trade.order_id}
+            )
+            asyncio.create_task(self.trade_logger.log_event(close_event))
 
             # IMPORTANT: Cancel remaining orders (SL or TP that didn't trigger)
             print(f"[CLEANUP] Position closed by {reason} - cancelling remaining orders...")
@@ -575,11 +630,29 @@ class PaperTradingManager:
             self.trade_history.append(self.current_trade)
             self._log_trade(self.current_trade, f"CLOSED ({reason})")
 
+            # Log to persistent trade logger
+            action = "TAKE_PROFIT" if "take_profit" in reason else "STOP_LOSS" if "stop_loss" in reason else "CLOSE"
+            close_event = TradeEvent(
+                id=str(uuid.uuid4()),
+                ts=datetime.now().isoformat(),
+                symbol=self.config.symbol,
+                timeframe="1m",
+                side='SELL' if self.current_trade.direction == 'LONG' else 'BUY',
+                action=action,
+                qty=self.current_trade.quantity,
+                entry_price=entry_price,
+                exit_price=actual_exit_price,
+                pnl=pnl,
+                reason=reason,
+                meta={'order_id': self.current_trade.order_id}
+            )
+            asyncio.create_task(self.trade_logger.log_event(close_event))
+
             # Cancel any remaining orders
             await self.connector.cancel_all_orders(self.config.symbol)
 
             self.current_trade = None
-    
+
     def get_stats(self) -> Dict[str, Any]:
         """Returnează statistici trading"""
         win_rate = (self.winning_trades / self.total_trades * 100) if self.total_trades > 0 else 0
