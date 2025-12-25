@@ -1,0 +1,35 @@
+[Unit]
+Description=OIE Trading Bot Docker Service
+Documentation=https://github.com/your-repo/oie-mvp
+After=docker.service network-online.target
+Requires=docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/oie-trading-bot
+
+# Start the container
+ExecStart=/usr/bin/docker compose up -d
+
+# Stop the container gracefully
+ExecStop=/usr/bin/docker compose down
+
+# Restart policy
+Restart=on-failure
+RestartSec=30s
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=oie-trading-bot
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/oie-trading-bot
+
+[Install]
+WantedBy=multi-user.target

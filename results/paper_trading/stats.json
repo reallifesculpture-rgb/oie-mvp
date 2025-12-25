@@ -1,0 +1,26 @@
+{
+  "is_running": false,
+  "symbol": "BTCUSDT",
+  "total_trades": 0,
+  "winning_trades": 0,
+  "losing_trades": 0,
+  "win_rate": 0,
+  "total_pnl": 0.0,
+  "current_position": {
+    "timestamp": "2025-12-25T16:47:01.382790",
+    "signal_type": "synced_position",
+    "confidence": 1.0,
+    "direction": "SHORT",
+    "entry_price": 87799.51666667,
+    "quantity": 0.012,
+    "stop_loss": 88677.5118333367,
+    "take_profit": 86921.52150000329,
+    "order_id": "synced",
+    "status": "OPEN",
+    "exit_price": null,
+    "exit_time": null,
+    "pnl": 0.0
+  },
+  "last_updated": "2025-12-25T16:48:01.658705",
+  "trade_history": []
+}

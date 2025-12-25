@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  trading-bot:
+    build: .
+    container_name: oie-trading-bot
+    restart: always
+
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+      # API Keys - set these in .env file or as environment variables
+      - BINANCE_TESTNET_API_KEY=${BINANCE_TESTNET_API_KEY}
+      - BINANCE_TESTNET_SECRET=${BINANCE_TESTNET_SECRET}
+
+    volumes:
+      # Persist logs and trading results
+      - ./logs:/app/logs
+      - ./results:/app/results
+      # Mount .env file for API keys
+      - ./.env:/app/.env:ro
+
+    ports:
+      - "8000:8000"
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+    # Resource limits (optional, adjust based on VPS specs)
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # Optional: Watchtower for automatic updates
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=86400  # Check daily
+      - WATCHTOWER_INCLUDE_STOPPED=true
+    # Disable if you don't want auto-updates
+    profiles:
+      - auto-update

@@ -1,0 +1,2358 @@
+[
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T14:40:40.828858",
+    "trade": {
+      "timestamp": "2025-12-22T14:40:40.828765",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.65,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.328,
+      "stop_loss": 3083.8027,
+      "take_profit": 2992.2046,
+      "order_id": "7814766166",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (test)",
+    "timestamp": "2025-12-22T14:40:41.645783",
+    "trade": {
+      "timestamp": "2025-12-22T14:40:40.828765",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.65,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.328,
+      "stop_loss": 3083.8027,
+      "take_profit": 2992.2046,
+      "order_id": "7814766166",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T14:40:41.645714",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (manager_stopped)",
+    "timestamp": "2025-12-22T15:22:58.204932",
+    "trade": {
+      "timestamp": "2025-12-22T15:22:56.147851",
+      "signal_type": "synced_position",
+      "confidence": 1.0,
+      "direction": "SHORT",
+      "entry_price": 89782.22,
+      "quantity": 0.01,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "order_id": "synced",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T15:22:58.204897",
+      "pnl": 897.8222000000001
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T15:55:03.146653",
+    "trade": {
+      "timestamp": "2025-12-22T15:55:03.146588",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 8.0,
+      "stop_loss": 126.4923,
+      "take_profit": 130.3254,
+      "order_id": "1525401864",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:07:03.462711",
+    "trade": {
+      "timestamp": "2025-12-22T16:07:03.462667",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 515.6,
+      "stop_loss": 1.920105,
+      "take_profit": 1.97829,
+      "order_id": "1248806976",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:10:02.674486",
+    "trade": {
+      "timestamp": "2025-12-22T16:10:02.674408",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 89188.11,
+      "take_profit": 91890.78,
+      "order_id": "11083989653",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:10:03.601691",
+    "trade": {
+      "timestamp": "2025-12-22T16:10:03.601595",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 860.3496,
+      "take_profit": 886.4208,
+      "order_id": "1086183886",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T16:13:01.756761",
+    "trade": {
+      "timestamp": "2025-12-22T15:32:51.468840",
+      "signal_type": "synced_position",
+      "confidence": 1.0,
+      "direction": "LONG",
+      "entry_price": 3058.073,
+      "quantity": 0.01,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "order_id": "synced",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T16:13:01.756703",
+      "pnl": -30.58073
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T16:13:02.267640",
+    "trade": {
+      "timestamp": "2025-12-22T16:10:03.601595",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 860.3496,
+      "take_profit": 886.4208,
+      "order_id": "1086183886",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T16:13:02.267593",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T16:13:02.748516",
+    "trade": {
+      "timestamp": "2025-12-22T16:07:03.462667",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 515.6,
+      "stop_loss": 1.920105,
+      "take_profit": 1.97829,
+      "order_id": "1248806976",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T16:13:02.748428",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T16:13:02.754503",
+    "trade": {
+      "timestamp": "2025-12-22T16:10:02.674408",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 89188.11,
+      "take_profit": 91890.78,
+      "order_id": "11083989653",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T16:13:02.754433",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:13:03.118711",
+    "trade": {
+      "timestamp": "2025-12-22T16:13:03.118669",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.6,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.328,
+      "stop_loss": 3074.945,
+      "take_profit": 2983.61,
+      "order_id": "7815415009",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:13:04.116787",
+    "trade": {
+      "timestamp": "2025-12-22T16:13:04.116700",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 875.2357000000001,
+      "take_profit": 849.2386,
+      "order_id": "1086189954",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:13:05.074359",
+    "trade": {
+      "timestamp": "2025-12-22T16:13:05.074262",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 517.3,
+      "stop_loss": 1.952633,
+      "take_profit": 1.894634,
+      "order_id": "1248819828",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T16:14:01.347823",
+    "trade": {
+      "timestamp": "2025-12-22T15:55:03.146588",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 8.0,
+      "stop_loss": 126.4923,
+      "take_profit": 130.3254,
+      "order_id": "1525401864",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T16:14:01.347783",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:14:02.726983",
+    "trade": {
+      "timestamp": "2025-12-22T16:14:02.726919",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 8.0,
+      "stop_loss": 129.3204,
+      "take_profit": 125.47919999999999,
+      "order_id": "1525441612",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T16:35:02.228617",
+    "trade": {
+      "timestamp": "2025-12-22T16:13:03.118669",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.6,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.328,
+      "stop_loss": 3074.945,
+      "take_profit": 2983.61,
+      "order_id": "7815415009",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T16:35:02.228571",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:35:03.592965",
+    "trade": {
+      "timestamp": "2025-12-22T16:35:03.592876",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.329,
+      "stop_loss": 3009.8475,
+      "take_profit": 3101.055,
+      "order_id": "7815578942",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:38:02.311310",
+    "trade": {
+      "timestamp": "2025-12-22T16:38:02.311218",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 90116.038,
+      "take_profit": 87439.32400000001,
+      "order_id": "11084445622",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T16:42:01.350760",
+    "trade": {
+      "timestamp": "2025-12-22T16:38:02.311218",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 90116.038,
+      "take_profit": 87439.32400000001,
+      "order_id": "11084445622",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T16:42:01.350716",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T16:48:02.329986",
+    "trade": {
+      "timestamp": "2025-12-22T16:13:04.116700",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 875.2357000000001,
+      "take_profit": 849.2386,
+      "order_id": "1086189954",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T16:48:02.329920",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:48:03.690040",
+    "trade": {
+      "timestamp": "2025-12-22T16:48:03.690004",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.75,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 857.6667,
+      "take_profit": 883.6566,
+      "order_id": "1086260310",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T16:53:01.845870",
+    "trade": {
+      "timestamp": "2025-12-22T16:13:05.074262",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 517.3,
+      "stop_loss": 1.952633,
+      "take_profit": 1.894634,
+      "order_id": "1248819828",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T16:53:01.845760",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:53:03.216995",
+    "trade": {
+      "timestamp": "2025-12-22T16:53:03.216884",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 518.0,
+      "stop_loss": 1.911195,
+      "take_profit": 1.9691100000000001,
+      "order_id": "1248907830",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T16:54:01.784802",
+    "trade": {
+      "timestamp": "2025-12-22T16:14:02.726919",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 8.0,
+      "stop_loss": 129.3204,
+      "take_profit": 125.47919999999999,
+      "order_id": "1525441612",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T16:54:01.784716",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T16:54:02.979611",
+    "trade": {
+      "timestamp": "2025-12-22T16:54:02.979528",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 88580.646,
+      "take_profit": 91264.908,
+      "order_id": "11084733034",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T17:23:01.776843",
+    "trade": {
+      "timestamp": "2025-12-22T16:48:03.690004",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.75,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 857.6667,
+      "take_profit": 883.6566,
+      "order_id": "1086260310",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T17:23:01.776749",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T17:23:01.795558",
+    "trade": {
+      "timestamp": "2025-12-22T16:35:03.592876",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.329,
+      "stop_loss": 3009.8475,
+      "take_profit": 3101.055,
+      "order_id": "7815578942",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T17:23:01.795467",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T17:23:01.841462",
+    "trade": {
+      "timestamp": "2025-12-22T16:53:03.216884",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 518.0,
+      "stop_loss": 1.911195,
+      "take_profit": 1.9691100000000001,
+      "order_id": "1248907830",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T17:23:01.841382",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T17:23:03.147513",
+    "trade": {
+      "timestamp": "2025-12-22T17:23:03.147439",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.6,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 876.3265,
+      "take_profit": 850.2969999999999,
+      "order_id": "1086326204",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T17:23:03.210258",
+    "trade": {
+      "timestamp": "2025-12-22T17:23:03.210202",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 516.3,
+      "stop_loss": 1.9563700000000002,
+      "take_profit": 1.89826,
+      "order_id": "1248966336",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T17:23:03.653392",
+    "trade": {
+      "timestamp": "2025-12-22T17:23:03.653306",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.328,
+      "stop_loss": 3081.1261999999997,
+      "take_profit": 2989.6076,
+      "order_id": "7815927944",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T17:25:02.280301",
+    "trade": {
+      "timestamp": "2025-12-22T17:23:03.210202",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 516.3,
+      "stop_loss": 1.9563700000000002,
+      "take_profit": 1.89826,
+      "order_id": "1248966336",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T17:25:02.280233",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T17:25:03.649907",
+    "trade": {
+      "timestamp": "2025-12-22T17:25:03.649815",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.75,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 515.8,
+      "stop_loss": 1.919214,
+      "take_profit": 1.9773720000000001,
+      "order_id": "1248970104",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T17:41:01.866010",
+    "trade": {
+      "timestamp": "2025-12-22T17:23:03.147439",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.6,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 876.3265,
+      "take_profit": 850.2969999999999,
+      "order_id": "1086326204",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T17:41:01.865919",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T17:41:03.725379",
+    "trade": {
+      "timestamp": "2025-12-22T17:41:03.725327",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 859.9734,
+      "take_profit": 886.0332,
+      "order_id": "1086359707",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T17:53:01.824283",
+    "trade": {
+      "timestamp": "2025-12-22T17:23:03.653306",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.328,
+      "stop_loss": 3081.1261999999997,
+      "take_profit": 2989.6076,
+      "order_id": "7815927944",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T17:53:01.824212",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T17:53:03.201626",
+    "trade": {
+      "timestamp": "2025-12-22T17:53:03.201554",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.329,
+      "stop_loss": 3013.5501,
+      "take_profit": 3104.8698,
+      "order_id": "7816133022",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T17:58:01.820482",
+    "trade": {
+      "timestamp": "2025-12-22T17:41:03.725327",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 859.9734,
+      "take_profit": 886.0332,
+      "order_id": "1086359707",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T17:58:01.820398",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T17:58:03.717420",
+    "trade": {
+      "timestamp": "2025-12-22T17:58:03.717341",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.75,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 875.9023000000001,
+      "take_profit": 849.8854,
+      "order_id": "1086390587",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T17:59:02.332004",
+    "trade": {
+      "timestamp": "2025-12-22T17:53:03.201554",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.329,
+      "stop_loss": 3013.5501,
+      "take_profit": 3104.8698,
+      "order_id": "7816133022",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T17:59:02.331934",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T17:59:03.172539",
+    "trade": {
+      "timestamp": "2025-12-22T16:54:02.979528",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 88580.646,
+      "take_profit": 91264.908,
+      "order_id": "11084733034",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T17:59:03.172469",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T17:59:04.666342",
+    "trade": {
+      "timestamp": "2025-12-22T17:59:04.666251",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.329,
+      "stop_loss": 3071.9755999999998,
+      "take_profit": 2980.7288,
+      "order_id": "7816173055",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T17:59:05.486318",
+    "trade": {
+      "timestamp": "2025-12-22T17:59:05.486239",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.6,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 90475.699,
+      "take_profit": 87788.302,
+      "order_id": "11085731759",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T18:07:01.779690",
+    "trade": {
+      "timestamp": "2025-12-22T17:25:03.649815",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.75,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 515.8,
+      "stop_loss": 1.919214,
+      "take_profit": 1.9773720000000001,
+      "order_id": "1248970104",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T18:07:01.779632",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T18:07:03.150380",
+    "trade": {
+      "timestamp": "2025-12-22T18:07:03.150286",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 518.6,
+      "stop_loss": 1.947482,
+      "take_profit": 1.8896359999999999,
+      "order_id": "1249058049",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T18:18:04.219168",
+    "trade": {
+      "timestamp": "2025-12-22T17:58:03.717341",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.75,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 875.9023000000001,
+      "take_profit": 849.8854,
+      "order_id": "1086390587",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T18:18:04.219104",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T18:18:06.062629",
+    "trade": {
+      "timestamp": "2025-12-22T18:18:06.062535",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 858.726,
+      "take_profit": 884.748,
+      "order_id": "1086432375",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T18:26:02.507809",
+    "trade": {
+      "timestamp": "2025-12-22T17:59:05.486239",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.6,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 90475.699,
+      "take_profit": 87788.302,
+      "order_id": "11085731759",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T18:26:02.507733",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T18:26:05.317442",
+    "trade": {
+      "timestamp": "2025-12-22T18:26:05.317362",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 88398.783,
+      "take_profit": 91077.534,
+      "order_id": "11086215102",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T18:42:01.745220",
+    "trade": {
+      "timestamp": "2025-12-22T17:59:04.666251",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.329,
+      "stop_loss": 3071.9755999999998,
+      "take_profit": 2980.7288,
+      "order_id": "7816173055",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T18:42:01.745167",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T18:42:03.142944",
+    "trade": {
+      "timestamp": "2025-12-22T18:42:03.142909",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.33,
+      "stop_loss": 3003.5312999999996,
+      "take_profit": 3094.5474,
+      "order_id": "7816501793",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T18:45:02.086778",
+    "trade": {
+      "timestamp": "2025-12-22T15:40:22.710751",
+      "signal_type": "synced_position",
+      "confidence": 1.0,
+      "direction": "LONG",
+      "entry_price": 3058.073,
+      "quantity": 0.01,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "order_id": "synced",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T18:45:02.086658",
+      "pnl": -30.58073
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T18:45:02.097290",
+    "trade": {
+      "timestamp": "2025-12-22T18:42:03.142909",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.33,
+      "stop_loss": 3003.5312999999996,
+      "take_profit": 3094.5474,
+      "order_id": "7816501793",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T18:45:02.097243",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T18:45:02.295175",
+    "trade": {
+      "timestamp": "2025-12-22T18:45:02.295076",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.6,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 90242.18699999999,
+      "take_profit": 87561.726,
+      "order_id": "11086514335",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T18:45:03.965614",
+    "trade": {
+      "timestamp": "2025-12-22T18:45:03.965560",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.33,
+      "stop_loss": 3059.9566,
+      "take_profit": 2969.0667999999996,
+      "order_id": "7816523496",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (manager_stopped)",
+    "timestamp": "2025-12-22T18:45:56.340863",
+    "trade": {
+      "timestamp": "2025-12-22T18:45:03.965560",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 0.33,
+      "stop_loss": 3059.9566,
+      "take_profit": 2969.0667999999996,
+      "order_id": "7816523496",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T18:45:56.340790",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (manager_stopped)",
+    "timestamp": "2025-12-22T18:45:58.018673",
+    "trade": {
+      "timestamp": "2025-12-22T18:26:05.317362",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 0.011,
+      "stop_loss": 88398.783,
+      "take_profit": 91077.534,
+      "order_id": "11086215102",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T18:45:58.018607",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (manager_stopped)",
+    "timestamp": "2025-12-22T18:45:59.691061",
+    "trade": {
+      "timestamp": "2025-12-22T18:18:06.062535",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 0.0,
+      "quantity": 1.15,
+      "stop_loss": 858.726,
+      "take_profit": 884.748,
+      "order_id": "1086432375",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T18:45:59.691013",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (manager_stopped)",
+    "timestamp": "2025-12-22T18:46:01.363590",
+    "trade": {
+      "timestamp": "2025-12-22T18:07:03.150286",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 0.0,
+      "quantity": 518.6,
+      "stop_loss": 1.947482,
+      "take_profit": 1.8896359999999999,
+      "order_id": "1249058049",
+      "status": "CLOSED",
+      "exit_price": 0.0,
+      "exit_time": "2025-12-22T18:46:01.363511",
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T19:09:04.874625",
+    "trade": {
+      "timestamp": "2025-12-22T19:09:04.874544",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 126.7,
+      "quantity": 8.0,
+      "stop_loss": 127.9771,
+      "take_profit": 124.1758,
+      "order_id": "1525817964",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T19:16:02.753021",
+    "trade": {
+      "timestamp": "2025-12-22T18:47:18.784847",
+      "signal_type": "synced_position",
+      "confidence": 1.0,
+      "direction": "SHORT",
+      "entry_price": 89199.6,
+      "quantity": 0.011,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "order_id": "synced",
+      "status": "CLOSED",
+      "exit_price": 89408.58182,
+      "exit_time": "2025-12-22T19:16:02.752892",
+      "pnl": -2.2988000200000096
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T19:16:03.829454",
+    "trade": {
+      "timestamp": "2025-12-22T19:16:03.829389",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.7000000000000001,
+      "direction": "LONG",
+      "entry_price": 3036.69979,
+      "quantity": 0.329,
+      "stop_loss": 3005.4123,
+      "take_profit": 3096.4854,
+      "order_id": "7816746899",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T19:16:05.898440",
+    "trade": {
+      "timestamp": "2025-12-22T19:16:05.898339",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.7000000000000001,
+      "direction": "LONG",
+      "entry_price": 89410.9,
+      "quantity": 0.011,
+      "stop_loss": 88514.019,
+      "take_profit": 91196.262,
+      "order_id": "11087008309",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T19:18:03.406734",
+    "trade": {
+      "timestamp": "2025-12-22T19:18:03.406630",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.65,
+      "direction": "SHORT",
+      "entry_price": 1.9306,
+      "quantity": 517.8,
+      "stop_loss": 1.950512,
+      "take_profit": 1.892576,
+      "order_id": "1249210528",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T19:27:02.792597",
+    "trade": {
+      "timestamp": "2025-12-22T19:18:03.406630",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.65,
+      "direction": "SHORT",
+      "entry_price": 1.9306,
+      "quantity": 517.8,
+      "stop_loss": 1.950512,
+      "take_profit": 1.892576,
+      "order_id": "1249210528",
+      "status": "CLOSED",
+      "exit_price": 1.934,
+      "exit_time": "2025-12-22T19:27:02.792497",
+      "pnl": -1.760519999999921
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T19:27:05.255691",
+    "trade": {
+      "timestamp": "2025-12-22T19:27:05.255607",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.65,
+      "direction": "LONG",
+      "entry_price": 1.9338,
+      "quantity": 517.1,
+      "stop_loss": 1.9144619999999999,
+      "take_profit": 1.972476,
+      "order_id": "1249229575",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T19:45:02.546562",
+    "trade": {
+      "timestamp": "2025-12-22T19:16:03.829389",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.7000000000000001,
+      "direction": "LONG",
+      "entry_price": 3036.69979,
+      "quantity": 0.329,
+      "stop_loss": 3005.4123,
+      "take_profit": 3096.4854,
+      "order_id": "7816746899",
+      "status": "CLOSED",
+      "exit_price": 3028.01,
+      "exit_time": "2025-12-22T19:45:02.546480",
+      "pnl": -2.8589409099999683
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T19:45:04.713248",
+    "trade": {
+      "timestamp": "2025-12-22T19:45:04.713156",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 3028.00021,
+      "quantity": 0.33,
+      "stop_loss": 3058.2901,
+      "take_profit": 2967.4498000000003,
+      "order_id": "7816947683",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T19:51:03.767356",
+    "trade": {
+      "timestamp": "2025-12-22T19:27:05.255607",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.65,
+      "direction": "LONG",
+      "entry_price": 1.9338,
+      "quantity": 517.1,
+      "stop_loss": 1.9144619999999999,
+      "take_profit": 1.972476,
+      "order_id": "1249229575",
+      "status": "CLOSED",
+      "exit_price": 1.9328,
+      "exit_time": "2025-12-22T19:51:03.767249",
+      "pnl": -0.517099999999943
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T19:51:06.201438",
+    "trade": {
+      "timestamp": "2025-12-22T19:51:06.201342",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 1.9329,
+      "quantity": 517.4,
+      "stop_loss": 1.952229,
+      "take_profit": 1.894242,
+      "order_id": "1249277041",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T19:52:02.029546",
+    "trade": {
+      "timestamp": "2025-12-22T19:16:05.898339",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.7000000000000001,
+      "direction": "LONG",
+      "entry_price": 89410.9,
+      "quantity": 0.011,
+      "stop_loss": 88514.019,
+      "take_profit": 91196.262,
+      "order_id": "11087008309",
+      "status": "CLOSED",
+      "exit_price": 89317.73636,
+      "exit_time": "2025-12-22T19:52:02.029513",
+      "pnl": -1.0248000399999873
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T19:52:04.198108",
+    "trade": {
+      "timestamp": "2025-12-22T19:52:04.198014",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.7000000000000001,
+      "direction": "SHORT",
+      "entry_price": 89317.71818,
+      "quantity": 0.011,
+      "stop_loss": 90210.877,
+      "take_profit": 87531.34599999999,
+      "order_id": "11087552847",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T20:02:03.330572",
+    "trade": {
+      "timestamp": "2025-12-22T20:02:03.330449",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.6,
+      "direction": "SHORT",
+      "entry_price": 866.07,
+      "quantity": 1.15,
+      "stop_loss": 874.7307000000001,
+      "take_profit": 848.7486,
+      "order_id": "1086634543",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T21:34:03.298951",
+    "trade": {
+      "timestamp": "2025-12-22T19:52:04.198014",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.7000000000000001,
+      "direction": "SHORT",
+      "entry_price": 89317.71818,
+      "quantity": 0.011,
+      "stop_loss": 90210.877,
+      "take_profit": 87531.34599999999,
+      "order_id": "11087552847",
+      "status": "CLOSED",
+      "exit_price": 88123.1,
+      "exit_time": "2025-12-22T21:34:03.294757",
+      "pnl": 13.140799979999894
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T21:34:05.954502",
+    "trade": {
+      "timestamp": "2025-12-22T21:34:05.954266",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 88135.9,
+      "quantity": 0.011,
+      "stop_loss": 87241.869,
+      "take_profit": 89885.562,
+      "order_id": "11089171816",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T21:46:02.732357",
+    "trade": {
+      "timestamp": "2025-12-22T19:51:06.201342",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 1.9329,
+      "quantity": 517.4,
+      "stop_loss": 1.952229,
+      "take_profit": 1.894242,
+      "order_id": "1249277041",
+      "status": "CLOSED",
+      "exit_price": 1.9005,
+      "exit_time": "2025-12-22T21:46:02.732243",
+      "pnl": 16.76375999999999
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T21:46:05.846007",
+    "trade": {
+      "timestamp": "2025-12-22T21:46:05.845961",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.65,
+      "direction": "LONG",
+      "entry_price": 1.9009,
+      "quantity": 526.2,
+      "stop_loss": 1.8814950000000001,
+      "take_profit": 1.9385100000000002,
+      "order_id": "1249533751",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T21:47:02.520507",
+    "trade": {
+      "timestamp": "2025-12-22T20:02:03.330449",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.6,
+      "direction": "SHORT",
+      "entry_price": 866.07,
+      "quantity": 1.15,
+      "stop_loss": 874.7307000000001,
+      "take_profit": 848.7486,
+      "order_id": "1086634543",
+      "status": "CLOSED",
+      "exit_price": 857.89,
+      "exit_time": "2025-12-22T21:47:02.520443",
+      "pnl": 9.407000000000073
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T21:47:02.816723",
+    "trade": {
+      "timestamp": "2025-12-22T19:09:04.874544",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 126.7,
+      "quantity": 8.0,
+      "stop_loss": 127.9771,
+      "take_profit": 124.1758,
+      "order_id": "1525817964",
+      "status": "CLOSED",
+      "exit_price": 124.96,
+      "exit_time": "2025-12-22T21:47:02.816676",
+      "pnl": 13.920000000000073
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T21:47:05.165143",
+    "trade": {
+      "timestamp": "2025-12-22T21:47:05.162127",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 857.94,
+      "quantity": 1.17,
+      "stop_loss": 849.3111,
+      "take_profit": 875.0478,
+      "order_id": "1086847206",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T21:47:06.436464",
+    "trade": {
+      "timestamp": "2025-12-22T21:47:06.436370",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 124.98,
+      "quantity": 8.0,
+      "stop_loss": 123.71039999999999,
+      "take_profit": 127.4592,
+      "order_id": "1526163288",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T21:54:03.685490",
+    "trade": {
+      "timestamp": "2025-12-22T21:47:06.436370",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 124.98,
+      "quantity": 8.0,
+      "stop_loss": 123.71039999999999,
+      "take_profit": 127.4592,
+      "order_id": "1526163288",
+      "status": "CLOSED",
+      "exit_price": 124.45,
+      "exit_time": "2025-12-22T21:54:03.685444",
+      "pnl": -4.240000000000009
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T21:54:06.335621",
+    "trade": {
+      "timestamp": "2025-12-22T21:54:06.335571",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 124.45,
+      "quantity": 8.0,
+      "stop_loss": 125.6945,
+      "take_profit": 121.961,
+      "order_id": "1526177883",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:02:03.078400",
+    "trade": {
+      "timestamp": "2025-12-22T21:46:05.845961",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.65,
+      "direction": "LONG",
+      "entry_price": 1.9009,
+      "quantity": 526.2,
+      "stop_loss": 1.8814950000000001,
+      "take_profit": 1.9385100000000002,
+      "order_id": "1249533751",
+      "status": "CLOSED",
+      "exit_price": 1.8956,
+      "exit_time": "2025-12-22T22:02:03.078337",
+      "pnl": -2.7888600000000436
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:02:06.206476",
+    "trade": {
+      "timestamp": "2025-12-22T22:02:06.206431",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 1.8956,
+      "quantity": 527.5,
+      "stop_loss": 1.914758,
+      "take_profit": 1.8578839999999999,
+      "order_id": "1249568319",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:06:03.350455",
+    "trade": {
+      "timestamp": "2025-12-22T19:45:04.713156",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 3028.00021,
+      "quantity": 0.33,
+      "stop_loss": 3058.2901,
+      "take_profit": 2967.4498000000003,
+      "order_id": "7816947683",
+      "status": "CLOSED",
+      "exit_price": 2982.44,
+      "exit_time": "2025-12-22T22:06:03.350366",
+      "pnl": 15.034869300000032
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:06:05.811804",
+    "trade": {
+      "timestamp": "2025-12-22T22:06:05.811729",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 2982.44,
+      "quantity": 0.335,
+      "stop_loss": 2952.6156,
+      "take_profit": 3042.0888,
+      "order_id": "7817965231",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:16:02.108284",
+    "trade": {
+      "timestamp": "2025-12-22T21:34:05.954266",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 88135.9,
+      "quantity": 0.011,
+      "stop_loss": 87241.869,
+      "take_profit": 89885.562,
+      "order_id": "11089171816",
+      "status": "CLOSED",
+      "exit_price": 88292.4,
+      "exit_time": "2025-12-22T22:16:02.108252",
+      "pnl": 1.7214999999999998
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:16:04.774043",
+    "trade": {
+      "timestamp": "2025-12-22T22:16:04.773977",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.75,
+      "direction": "SHORT",
+      "entry_price": 88292.4,
+      "quantity": 0.011,
+      "stop_loss": 89175.324,
+      "take_profit": 86526.552,
+      "order_id": "11089821681",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:17:02.669179",
+    "trade": {
+      "timestamp": "2025-12-22T21:54:06.335571",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 124.45,
+      "quantity": 8.0,
+      "stop_loss": 125.6945,
+      "take_profit": 121.961,
+      "order_id": "1526177883",
+      "status": "CLOSED",
+      "exit_price": 124.9525,
+      "exit_time": "2025-12-22T22:17:02.669143",
+      "pnl": -4.019999999999982
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:17:06.751765",
+    "trade": {
+      "timestamp": "2025-12-22T22:17:06.751723",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 125.05,
+      "quantity": 8.0,
+      "stop_loss": 123.3936,
+      "take_profit": 127.1328,
+      "order_id": "1526225500",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:23:04.505517",
+    "trade": {
+      "timestamp": "2025-12-22T21:47:05.162127",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 857.94,
+      "quantity": 1.17,
+      "stop_loss": 849.3111,
+      "take_profit": 875.0478,
+      "order_id": "1086847206",
+      "status": "CLOSED",
+      "exit_price": 855.81,
+      "exit_time": "2025-12-22T22:23:04.505428",
+      "pnl": -2.4921000000001277
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:23:08.116800",
+    "trade": {
+      "timestamp": "2025-12-22T22:23:08.116741",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 855.81,
+      "quantity": 1.17,
+      "stop_loss": 864.7721,
+      "take_profit": 839.0858000000001,
+      "order_id": "1086916274",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:27:05.353462",
+    "trade": {
+      "timestamp": "2025-12-22T22:23:08.116741",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 855.81,
+      "quantity": 1.17,
+      "stop_loss": 864.7721,
+      "take_profit": 839.0858000000001,
+      "order_id": "1086916274",
+      "status": "CLOSED",
+      "exit_price": 857.57,
+      "exit_time": "2025-12-22T22:27:05.353377",
+      "pnl": -2.0592000000001223
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:27:07.996496",
+    "trade": {
+      "timestamp": "2025-12-22T22:27:07.996394",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.75,
+      "direction": "LONG",
+      "entry_price": 857.6,
+      "quantity": 1.17,
+      "stop_loss": 848.9547,
+      "take_profit": 874.6806,
+      "order_id": "1086924283",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:28:02.779302",
+    "trade": {
+      "timestamp": "2025-12-22T22:02:06.206431",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.5,
+      "direction": "SHORT",
+      "entry_price": 1.8956,
+      "quantity": 527.5,
+      "stop_loss": 1.914758,
+      "take_profit": 1.8578839999999999,
+      "order_id": "1249568319",
+      "status": "CLOSED",
+      "exit_price": 1.8977,
+      "exit_time": "2025-12-22T22:28:02.779230",
+      "pnl": -1.1077499999999951
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:28:06.376210",
+    "trade": {
+      "timestamp": "2025-12-22T22:28:06.376123",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.75,
+      "direction": "LONG",
+      "entry_price": 1.8977,
+      "quantity": 527.1,
+      "stop_loss": 1.878327,
+      "take_profit": 1.935246,
+      "order_id": "1249623167",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:32:02.152207",
+    "trade": {
+      "timestamp": "2025-12-22T22:16:04.773977",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.75,
+      "direction": "SHORT",
+      "entry_price": 88292.4,
+      "quantity": 0.011,
+      "stop_loss": 89175.324,
+      "take_profit": 86526.552,
+      "order_id": "11089821681",
+      "status": "CLOSED",
+      "exit_price": 88424.92727,
+      "exit_time": "2025-12-22T22:32:02.152147",
+      "pnl": -1.4577999700000654
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:32:04.786084",
+    "trade": {
+      "timestamp": "2025-12-22T22:32:04.786020",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 88414.7,
+      "quantity": 0.011,
+      "stop_loss": 87531.642,
+      "take_profit": 90184.11600000001,
+      "order_id": "11090068135",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:47:02.641357",
+    "trade": {
+      "timestamp": "2025-12-22T22:28:06.376123",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.75,
+      "direction": "LONG",
+      "entry_price": 1.8977,
+      "quantity": 527.1,
+      "stop_loss": 1.878327,
+      "take_profit": 1.935246,
+      "order_id": "1249623167",
+      "status": "CLOSED",
+      "exit_price": 1.8979,
+      "exit_time": "2025-12-22T22:47:02.641270",
+      "pnl": 0.1054199999999884
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:47:02.675685",
+    "trade": {
+      "timestamp": "2025-12-22T22:06:05.811729",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 2982.44,
+      "quantity": 0.335,
+      "stop_loss": 2952.6156,
+      "take_profit": 3042.0888,
+      "order_id": "7817965231",
+      "status": "CLOSED",
+      "exit_price": 2990.16042,
+      "exit_time": "2025-12-22T22:47:02.675626",
+      "pnl": 2.586340700000035
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:47:03.660539",
+    "trade": {
+      "timestamp": "2025-12-22T22:27:07.996394",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.75,
+      "direction": "LONG",
+      "entry_price": 857.6,
+      "quantity": 1.17,
+      "stop_loss": 848.9547,
+      "take_profit": 874.6806,
+      "order_id": "1086924283",
+      "status": "CLOSED",
+      "exit_price": 857.22,
+      "exit_time": "2025-12-22T22:47:03.660454",
+      "pnl": -0.44459999999999467
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T22:47:03.842894",
+    "trade": {
+      "timestamp": "2025-12-22T22:32:04.786020",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 88414.7,
+      "quantity": 0.011,
+      "stop_loss": 87531.642,
+      "take_profit": 90184.11600000001,
+      "order_id": "11090068135",
+      "status": "CLOSED",
+      "exit_price": 88342.4,
+      "exit_time": "2025-12-22T22:47:03.842833",
+      "pnl": -0.795300000000032
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:47:05.797304",
+    "trade": {
+      "timestamp": "2025-12-22T22:47:05.797201",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.6,
+      "direction": "SHORT",
+      "entry_price": 2990.14021,
+      "quantity": 0.334,
+      "stop_loss": 3020.0616,
+      "take_profit": 2930.3568,
+      "order_id": "7818254736",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:47:06.262149",
+    "trade": {
+      "timestamp": "2025-12-22T22:47:06.262049",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 88334.47273,
+      "quantity": 0.011,
+      "stop_loss": 89218.35,
+      "take_profit": 86568.3,
+      "order_id": "11090302145",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:47:06.708325",
+    "trade": {
+      "timestamp": "2025-12-22T22:47:06.708271",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.65,
+      "direction": "SHORT",
+      "entry_price": 1.8979,
+      "quantity": 526.9,
+      "stop_loss": 1.916879,
+      "take_profit": 1.859942,
+      "order_id": "1249663154",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T22:47:06.816622",
+    "trade": {
+      "timestamp": "2025-12-22T22:47:06.816573",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.75,
+      "direction": "SHORT",
+      "entry_price": 857.22,
+      "quantity": 1.17,
+      "stop_loss": 865.7922,
+      "take_profit": 840.0756,
+      "order_id": "1086963399",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T23:12:03.556515",
+    "trade": {
+      "timestamp": "2025-12-22T22:47:06.816573",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.75,
+      "direction": "SHORT",
+      "entry_price": 857.22,
+      "quantity": 1.17,
+      "stop_loss": 865.7922,
+      "take_profit": 840.0756,
+      "order_id": "1086963399",
+      "status": "CLOSED",
+      "exit_price": 856.55,
+      "exit_time": "2025-12-22T23:12:03.556433",
+      "pnl": 0.7839000000000851
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T23:12:06.230961",
+    "trade": {
+      "timestamp": "2025-12-22T23:12:06.230908",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 856.55,
+      "quantity": 1.17,
+      "stop_loss": 847.9647,
+      "take_profit": 873.6605999999999,
+      "order_id": "1087010561",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T23:15:03.327479",
+    "trade": {
+      "timestamp": "2025-12-22T23:15:03.327382",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 856.64,
+      "quantity": 1.17,
+      "stop_loss": 865.1458,
+      "take_profit": 839.4484,
+      "order_id": "1087016200",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T23:16:03.143901",
+    "trade": {
+      "timestamp": "2025-12-22T22:47:06.708271",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.65,
+      "direction": "SHORT",
+      "entry_price": 1.8979,
+      "quantity": 526.9,
+      "stop_loss": 1.916879,
+      "take_profit": 1.859942,
+      "order_id": "1249663154",
+      "status": "CLOSED",
+      "exit_price": 1.8969,
+      "exit_time": "2025-12-22T23:16:03.143812",
+      "pnl": 0.526899999999942
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T23:16:05.800996",
+    "trade": {
+      "timestamp": "2025-12-22T23:16:05.800909",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 1.8969,
+      "quantity": 527.3,
+      "stop_loss": 1.877634,
+      "take_profit": 1.9345320000000001,
+      "order_id": "1249725337",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T23:20:02.713459",
+    "trade": {
+      "timestamp": "2025-12-22T18:46:55.026345",
+      "signal_type": "synced_position",
+      "confidence": 1.0,
+      "direction": "SHORT",
+      "entry_price": 89199.6,
+      "quantity": 0.011,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "order_id": "synced",
+      "status": "CLOSED",
+      "exit_price": 88390.6,
+      "exit_time": "2025-12-22T23:20:02.713375",
+      "pnl": 8.899
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T23:20:04.897124",
+    "trade": {
+      "timestamp": "2025-12-22T23:20:04.897065",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 88390.6,
+      "quantity": 0.011,
+      "stop_loss": 87495.30900000001,
+      "take_profit": 90146.682,
+      "order_id": "11090814651",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T23:30:03.219870",
+    "trade": {
+      "timestamp": "2025-12-22T23:30:03.219781",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 2990.28979,
+      "quantity": 0.334,
+      "stop_loss": 2959.9514999999997,
+      "take_profit": 3049.647,
+      "order_id": "7818556331",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T23:34:02.990325",
+    "trade": {
+      "timestamp": "2025-12-22T22:47:06.262049",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 88334.47273,
+      "quantity": 0.011,
+      "stop_loss": 89218.35,
+      "take_profit": 86568.3,
+      "order_id": "11090302145",
+      "status": "CLOSED",
+      "exit_price": 88280.0,
+      "exit_time": "2025-12-22T23:34:02.990193",
+      "pnl": 0.5992000299999345
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T23:34:05.694513",
+    "trade": {
+      "timestamp": "2025-12-22T23:34:05.694412",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.7000000000000001,
+      "direction": "SHORT",
+      "entry_price": 88280.0,
+      "quantity": 0.011,
+      "stop_loss": 89162.8,
+      "take_profit": 86514.4,
+      "order_id": "11091023793",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T23:40:02.645213",
+    "trade": {
+      "timestamp": "2025-12-22T23:30:03.219781",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 2990.28979,
+      "quantity": 0.334,
+      "stop_loss": 2959.9514999999997,
+      "take_profit": 3049.647,
+      "order_id": "7818556331",
+      "status": "CLOSED",
+      "exit_price": 2990.86979,
+      "exit_time": "2025-12-22T23:40:02.645179",
+      "pnl": 0.1937200000001276
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T23:40:02.713037",
+    "trade": {
+      "timestamp": "2025-12-22T23:15:03.327382",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.55,
+      "direction": "SHORT",
+      "entry_price": 856.64,
+      "quantity": 1.17,
+      "stop_loss": 865.1458,
+      "take_profit": 839.4484,
+      "order_id": "1087016200",
+      "status": "CLOSED",
+      "exit_price": 857.49,
+      "exit_time": "2025-12-22T23:40:02.712987",
+      "pnl": -0.9945000000000266
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T23:48:02.687562",
+    "trade": {
+      "timestamp": "2025-12-22T23:12:06.230908",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.55,
+      "direction": "LONG",
+      "entry_price": 856.55,
+      "quantity": 1.17,
+      "stop_loss": 847.9647,
+      "take_profit": 873.6605999999999,
+      "order_id": "1087010561",
+      "status": "CLOSED",
+      "exit_price": 858.31,
+      "exit_time": "2025-12-22T23:48:02.687516",
+      "pnl": 2.059199999999989
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T23:48:04.883463",
+    "trade": {
+      "timestamp": "2025-12-22T23:48:04.883406",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.5,
+      "direction": "LONG",
+      "entry_price": 858.31,
+      "quantity": 1.17,
+      "stop_loss": 849.7268999999999,
+      "take_profit": 875.4762,
+      "order_id": "1087077284",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  },
+  {
+    "action": "CLOSED (signal_reversal)",
+    "timestamp": "2025-12-22T23:52:02.581757",
+    "trade": {
+      "timestamp": "2025-12-22T23:34:05.694412",
+      "signal_type": "predictive_breakout_short",
+      "confidence": 0.7000000000000001,
+      "direction": "SHORT",
+      "entry_price": 88280.0,
+      "quantity": 0.011,
+      "stop_loss": 89162.8,
+      "take_profit": 86514.4,
+      "order_id": "11091023793",
+      "status": "CLOSED",
+      "exit_price": 88579.9,
+      "exit_time": "2025-12-22T23:52:02.581665",
+      "pnl": -3.2988999999999358
+    }
+  },
+  {
+    "action": "OPENED",
+    "timestamp": "2025-12-22T23:52:04.779683",
+    "trade": {
+      "timestamp": "2025-12-22T23:52:04.779584",
+      "signal_type": "predictive_breakout_long",
+      "confidence": 0.6,
+      "direction": "LONG",
+      "entry_price": 88586.1,
+      "quantity": 0.011,
+      "stop_loss": 87684.894,
+      "take_profit": 90342.012,
+      "order_id": "11091297550",
+      "status": "OPEN",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": 0.0
+    }
+  }
+]

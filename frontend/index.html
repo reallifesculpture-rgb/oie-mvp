@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OIE MVP - Paper Trading</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- Header Bar -->
+        <header class="header">
+            <div class="header-brand">
+                <span class="brand-name">OIE MVP</span>
+                <span class="brand-sub">Paper Trading</span>
+            </div>
+            <div class="header-actions">
+                <select class="symbol-select" id="symbolSelect">
+                    <option value="BTCUSDT">BTC</option>
+                    <option value="ETHUSDT">ETH</option>
+                    <option value="SOLUSDT">SOL</option>
+                    <option value="BNBUSDT">BNB</option>
+                    <option value="XRPUSDT">XRP</option>
+                </select>
+                <select class="timeframe-select" id="timeframeSelect">
+                    <option value="1m">1m</option>
+                    <option value="5m">5m</option>
+                    <option value="15m">15m</option>
+                </select>
+                <span class="badge" id="statusBadge">Disconnected</span>
+                <button class="btn-connect" id="connectBtn">Connect</button>
+                <button class="btn-start-all" id="startAllBtn">Start All</button>
+            </div>
+        </header>
+
+        <!-- Market Conditions Grid -->
+        <section class="market-cards-section">
+            <div class="market-cards-grid" id="marketCardsGrid">
+                <!-- Initial placeholder cards - will be replaced by JavaScript -->
+                <div class="market-card selected" data-symbol="BTCUSDT">
+                    <div class="market-card-header">
+                        <span class="market-card-symbol">BTC</span>
+                        <span class="market-card-bars">0/20</span>
+                    </div>
+                    <div class="market-card-price">--</div>
+                    <div class="market-card-stats">
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Delta</span>
+                            <span class="market-card-stat-value">+0.0</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">IFI</span>
+                            <span class="market-card-stat-value">0.00</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Vortex</span>
+                            <span class="market-card-stat-value">None</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Trades</span>
+                            <span class="market-card-stat-value">0</span>
+                        </div>
+                    </div>
+                    <div class="market-card-trend">
+                        <span class="market-card-trend-label">Trend:</span>
+                        <span class="market-card-trend-value neutral">Neutral</span>
+                    </div>
+                </div>
+                <div class="market-card" data-symbol="ETHUSDT">
+                    <div class="market-card-header">
+                        <span class="market-card-symbol">ETH</span>
+                        <span class="market-card-bars">0/20</span>
+                    </div>
+                    <div class="market-card-price">--</div>
+                    <div class="market-card-stats">
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Delta</span>
+                            <span class="market-card-stat-value">+0.0</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">IFI</span>
+                            <span class="market-card-stat-value">0.00</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Vortex</span>
+                            <span class="market-card-stat-value">None</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Trades</span>
+                            <span class="market-card-stat-value">0</span>
+                        </div>
+                    </div>
+                    <div class="market-card-trend">
+                        <span class="market-card-trend-label">Trend:</span>
+                        <span class="market-card-trend-value neutral">Neutral</span>
+                    </div>
+                </div>
+                <div class="market-card" data-symbol="SOLUSDT">
+                    <div class="market-card-header">
+                        <span class="market-card-symbol">SOL</span>
+                        <span class="market-card-bars">0/20</span>
+                    </div>
+                    <div class="market-card-price">--</div>
+                    <div class="market-card-stats">
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Delta</span>
+                            <span class="market-card-stat-value">+0.0</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">IFI</span>
+                            <span class="market-card-stat-value">0.00</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Vortex</span>
+                            <span class="market-card-stat-value">None</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Trades</span>
+                            <span class="market-card-stat-value">0</span>
+                        </div>
+                    </div>
+                    <div class="market-card-trend">
+                        <span class="market-card-trend-label">Trend:</span>
+                        <span class="market-card-trend-value neutral">Neutral</span>
+                    </div>
+                </div>
+                <div class="market-card" data-symbol="BNBUSDT">
+                    <div class="market-card-header">
+                        <span class="market-card-symbol">BNB</span>
+                        <span class="market-card-bars">0/20</span>
+                    </div>
+                    <div class="market-card-price">--</div>
+                    <div class="market-card-stats">
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Delta</span>
+                            <span class="market-card-stat-value">+0.0</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">IFI</span>
+                            <span class="market-card-stat-value">0.00</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Vortex</span>
+                            <span class="market-card-stat-value">None</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Trades</span>
+                            <span class="market-card-stat-value">0</span>
+                        </div>
+                    </div>
+                    <div class="market-card-trend">
+                        <span class="market-card-trend-label">Trend:</span>
+                        <span class="market-card-trend-value neutral">Neutral</span>
+                    </div>
+                </div>
+                <div class="market-card" data-symbol="XRPUSDT">
+                    <div class="market-card-header">
+                        <span class="market-card-symbol">XRP</span>
+                        <span class="market-card-bars">0/20</span>
+                    </div>
+                    <div class="market-card-price">--</div>
+                    <div class="market-card-stats">
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Delta</span>
+                            <span class="market-card-stat-value">+0.0</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">IFI</span>
+                            <span class="market-card-stat-value">0.00</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Vortex</span>
+                            <span class="market-card-stat-value">None</span>
+                        </div>
+                        <div class="market-card-stat">
+                            <span class="market-card-stat-label">Trades</span>
+                            <span class="market-card-stat-value">0</span>
+                        </div>
+                    </div>
+                    <div class="market-card-trend">
+                        <span class="market-card-trend-label">Trend:</span>
+                        <span class="market-card-trend-value neutral">Neutral</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Grid -->
+        <main class="grid">
+            <!-- Left Column (wider) -->
+            <div class="col-main">
+                <!-- Current Position Card -->
+                <div class="card">
+                    <div class="card-title">Current Position</div>
+                    <div class="card-content" id="positionContent">
+                        <div class="empty-state" id="noPosition">No active position</div>
+                        <div class="position-data" id="positionData" style="display:none;">
+                            <div class="position-header">
+                                <span class="position-side" id="posSide">LONG</span>
+                                <span class="position-symbol">BTCUSDT</span>
+                                <span class="position-pnl" id="posPnl">+$0.00</span>
+                            </div>
+                            <div class="position-grid">
+                                <div class="position-item">
+                                    <span class="pos-label">Entry</span>
+                                    <span class="pos-value" id="posEntry">$0.00</span>
+                                </div>
+                                <div class="position-item">
+                                    <span class="pos-label">Current</span>
+                                    <span class="pos-value" id="posCurrent">$0.00</span>
+                                </div>
+                                <div class="position-item">
+                                    <span class="pos-label">Stop Loss</span>
+                                    <span class="pos-value pos-sl" id="posSL">$0.00</span>
+                                </div>
+                                <div class="position-item">
+                                    <span class="pos-label">Take Profit</span>
+                                    <span class="pos-value pos-tp" id="posTP">$0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Log Card -->
+                <div class="card">
+                    <div class="card-title">Activity Log</div>
+                    <div class="log-container" id="logContainer">
+                        <div class="log-line">[--:--:--] Waiting for connection...</div>
+                    </div>
+                </div>
+
+                <!-- Trade History Card -->
+                <div class="card">
+                    <div class="card-title">Trade History</div>
+                    <div class="table-container">
+                        <table class="trade-table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Side</th>
+                                    <th>Entry</th>
+                                    <th>Exit</th>
+                                    <th>P&L</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tradeTableBody">
+                            </tbody>
+                        </table>
+                        <div class="empty-state" id="noTrades">No trades recorded yet</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column (narrower) -->
+            <div class="col-side">
+                <!-- Today's Stats Card -->
+                <div class="card">
+                    <div class="card-title">Today's Stats</div>
+                    <div class="big-stat">
+                        <span class="big-stat-label">Today P&L</span>
+                        <span class="big-stat-value" id="todayPnl">$0.00</span>
+                    </div>
+                    <div class="stat-rows">
+                        <div class="stat-row">
+                            <span class="stat-label">Trades</span>
+                            <span class="stat-value" id="todayTrades">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Wins</span>
+                            <span class="stat-value" id="todayWins">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Losses</span>
+                            <span class="stat-value" id="todayLosses">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Win Rate</span>
+                            <span class="stat-value" id="todayWR">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- All-Time Stats Card -->
+                <div class="card">
+                    <div class="card-title">All-Time Stats</div>
+                    <div class="big-stat">
+                        <span class="big-stat-label">Total Equity</span>
+                        <span class="big-stat-value" id="equity">$10,000.00</span>
+                    </div>
+                    <div class="stat-rows">
+                        <div class="stat-row">
+                            <span class="stat-label">Total Trades</span>
+                            <span class="stat-value" id="totalTrades">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Win Rate</span>
+                            <span class="stat-value" id="totalWR">0%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Profit Factor</span>
+                            <span class="stat-value" id="profitFactor">0.00</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Total P&L</span>
+                            <span class="stat-value" id="totalPnl">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            BTCUSDT &middot; <span id="currentTF">1m</span> &middot; Last update: <span id="lastUpdate">--:--:--</span> &middot; OIE MVP v1.0
+        </footer>
+    </div>
+
+    <script src="app.js?v=7"></script>
+</body>
+
+</html>

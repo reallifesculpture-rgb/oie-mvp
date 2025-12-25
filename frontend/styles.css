@@ -1,0 +1,763 @@
+/* ============================================
+   OIE MVP Dashboard - Light Theme, Minimal
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #f5f6f8;
+    --card-bg: #ffffff;
+    --border: #e2e5e9;
+    --text: #1a1d21;
+    --text-secondary: #5c6370;
+    --text-muted: #9199a4;
+    --accent: #2563eb;
+    --positive: #16a34a;
+    --negative: #dc2626;
+    --radius: 12px;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    font-size: 14px;
+    min-height: 100vh;
+}
+
+/* Dashboard Container */
+.dashboard {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.header-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.brand-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.brand-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+    background: #fee2e2;
+    color: var(--negative);
+}
+
+.badge.connected {
+    background: #dcfce7;
+    color: var(--positive);
+}
+
+.btn-connect {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btn-connect:hover {
+    background: #1d4ed8;
+}
+
+.timeframe-select {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+}
+
+.timeframe-select:hover {
+    border-color: var(--accent);
+}
+
+.timeframe-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.symbol-select {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+}
+
+.symbol-select:hover {
+    border-color: var(--accent);
+}
+
+.btn-start-all {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--positive);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btn-start-all:hover {
+    background: #15803d;
+}
+
+/* Symbols Grid */
+.symbols-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.symbol-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.symbol-item.active {
+    border-color: var(--positive);
+    background: #f0fdf4;
+}
+
+.symbol-item.collecting {
+    border-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.symbol-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.symbol-price {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.symbol-bars {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--card-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.symbol-delta {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.symbol-delta.positive {
+    color: var(--positive);
+}
+
+.symbol-delta.negative {
+    color: var(--negative);
+}
+
+/* ============================================
+   MARKET CARDS SECTION
+   ============================================ */
+.market-cards-section {
+    margin-bottom: 20px;
+}
+
+.market-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.market-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.market-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.market-card.selected {
+    border-color: var(--accent);
+    background: #f0f7ff;
+}
+
+.market-card.collecting {
+    border-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.market-card.active {
+    border-left: 3px solid var(--positive);
+}
+
+.market-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.market-card-symbol {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.market-card-bars {
+    font-size: 10px;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.market-card-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    font-variant-numeric: tabular-nums;
+}
+
+.market-card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.market-card-stat {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+}
+
+.market-card-stat-label {
+    color: var(--text-muted);
+}
+
+.market-card-stat-value {
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+}
+
+.market-card-stat-value.positive {
+    color: var(--positive);
+}
+
+.market-card-stat-value.negative {
+    color: var(--negative);
+}
+
+.market-card-trend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+}
+
+.market-card-trend-label {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.market-card-trend-value {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.market-card-trend-value.bullish {
+    background: #dcfce7;
+    color: var(--positive);
+}
+
+.market-card-trend-value.bearish {
+    background: #fee2e2;
+    color: var(--negative);
+}
+
+.market-card-trend-value.neutral {
+    background: var(--bg);
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   MAIN GRID
+   ============================================ */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
+    flex: 1;
+}
+
+.col-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.col-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ============================================
+   CARD COMPONENT
+   ============================================ */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px 20px;
+}
+
+.card-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.card-content {
+    min-height: 60px;
+}
+
+/* ============================================
+   CURRENT POSITION
+   ============================================ */
+.empty-state {
+    color: var(--text-muted);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 13px;
+}
+
+.position-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.position-side {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.position-side.long {
+    background: #dcfce7;
+    color: var(--positive);
+}
+
+.position-side.short {
+    background: #fee2e2;
+    color: var(--negative);
+}
+
+.position-symbol {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.position-pnl {
+    margin-left: auto;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.position-pnl.profit {
+    color: var(--positive);
+}
+
+.position-pnl.loss {
+    color: var(--negative);
+}
+
+.position-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.position-item {
+    background: var(--bg);
+    padding: 10px 12px;
+    border-radius: 8px;
+}
+
+.pos-label {
+    display: block;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.pos-value {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+}
+
+.pos-sl {
+    color: var(--negative);
+}
+
+.pos-tp {
+    color: var(--positive);
+}
+
+/* ============================================
+   ACTIVITY LOG
+   ============================================ */
+.log-container {
+    height: 180px;
+    overflow-y: auto;
+    background: #fafbfc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    font-size: 12px;
+}
+
+.log-line {
+    padding: 3px 0;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.log-line.signal {
+    color: var(--accent);
+}
+
+.log-line.long {
+    color: var(--positive);
+}
+
+.log-line.short {
+    color: var(--negative);
+}
+
+.log-line.win {
+    color: var(--positive);
+    font-weight: 600;
+}
+
+.log-line.loss {
+    color: var(--negative);
+    font-weight: 600;
+}
+
+/* ============================================
+   TRADE TABLE
+   ============================================ */
+.table-container {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.trade-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.trade-table thead {
+    position: sticky;
+    top: 0;
+    background: var(--card-bg);
+}
+
+.trade-table th {
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--border);
+}
+
+.trade-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    font-variant-numeric: tabular-nums;
+}
+
+.trade-table tbody tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+.trade-table tbody tr:hover {
+    background: #f0f2f5;
+}
+
+.side-long {
+    color: var(--positive);
+    font-weight: 600;
+}
+
+.side-short {
+    color: var(--negative);
+    font-weight: 600;
+}
+
+.pnl-profit {
+    color: var(--positive);
+    font-weight: 600;
+}
+
+.pnl-loss {
+    color: var(--negative);
+    font-weight: 600;
+}
+
+/* ============================================
+   STAT ROWS (Label ..... Value)
+   ============================================ */
+.stat-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--border);
+}
+
+.stat-row:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.stat-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-value.positive {
+    color: var(--positive);
+}
+
+.stat-value.negative {
+    color: var(--negative);
+}
+
+/* ============================================
+   BIG STAT (P&L, Equity)
+   ============================================ */
+.big-stat {
+    text-align: center;
+    padding: 16px 0;
+    margin-bottom: 12px;
+    background: var(--bg);
+    border-radius: 8px;
+}
+
+.big-stat-label {
+    display: block;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.big-stat-value {
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+}
+
+.big-stat-value.profit {
+    color: var(--positive);
+}
+
+.big-stat-value.loss {
+    color: var(--negative);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    text-align: center;
+    padding: 16px 0;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #c5cad1;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+    .market-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .col-side {
+        order: -1;
+    }
+
+    .position-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .market-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard {
+        padding: 12px;
+    }
+
+    .header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .position-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .market-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
