@@ -1,9 +1,11 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, Response
+from fastapi.responses import FileResponse, Response, JSONResponse
+from fastapi.encoders import jsonable_encoder
 import asyncio
 import os
+import traceback
 
 from backend.api.routes_replay import router as replay_router
 from backend.api.routes_topology import router as topology_router
@@ -119,83 +121,147 @@ async def get_symbols():
 @app.post("/api/v1/trading/start")
 async def start_live_trading(symbol: str = "BTCUSDT", interval: str = "1m"):
     """Pornește live trading cu Binance Testnet pentru un simbol"""
-    if symbol not in SUPPORTED_SYMBOLS:
-        return {"success": False, "error": f"Symbol {symbol} not supported. Use one of: {SUPPORTED_SYMBOLS}"}
+    try:
+        if symbol not in SUPPORTED_SYMBOLS:
+            return JSONResponse(
+                status_code=400,
+                content={"ok": False, "error": f"Symbol {symbol} not supported. Use one of: {SUPPORTED_SYMBOLS}"}
+            )
 
-    runner = get_runner(symbol, interval)
-    if runner is None:
-        return {"success": False, "error": "Live trading not configured"}
+        runner = get_runner(symbol, interval)
+        if runner is None:
+            return JSONResponse(
+                status_code=503,
+                content={"ok": False, "error": "Live trading not configured"}
+            )
 
-    # If already running, return success (it's already working)
-    if runner.running:
-        return {"success": True, "symbol": symbol, "interval": interval, "status": runner.get_status(), "message": "Already running"}
+        # If already running, return success (it's already working)
+        if runner.running:
+            status = runner.get_status()
+            return JSONResponse(content=jsonable_encoder({
+                "ok": True, "success": True, "symbol": symbol, "interval": interval,
+                "status": status, "message": "Already running"
+            }))
 
-    success = await runner.start()
-    return {"success": success, "symbol": symbol, "interval": interval, "status": runner.get_status()}
+        success = await runner.start()
+        status = runner.get_status()
+        return JSONResponse(content=jsonable_encoder({
+            "ok": True, "success": success, "symbol": symbol, "interval": interval, "status": status
+        }))
+    except Exception as e:
+        print(f"[ERROR] /trading/start: {e}")
+        traceback.print_exc()
+        return JSONResponse(
+            status_code=500,
+            content={"ok": False, "error": str(e)}
+        )
 
 @app.post("/api/v1/trading/start-all")
 async def start_all_symbols(interval: str = "1m"):
     """Pornește trading pentru toate simbolurile pe un timeframe"""
-    results = {}
-    for symbol in SUPPORTED_SYMBOLS:
-        runner = get_runner(symbol, interval)
-        if runner:
-            if not runner.running:
-                success = await runner.start()
-                results[symbol] = {"success": success, "status": "started" if success else "failed"}
-            else:
-                results[symbol] = {"success": True, "status": "already_running"}
-        else:
-            results[symbol] = {"success": False, "status": "not_configured"}
-    return {"interval": interval, "results": results}
+    try:
+        results = {}
+        for symbol in SUPPORTED_SYMBOLS:
+            try:
+                runner = get_runner(symbol, interval)
+                if runner:
+                    if not runner.running:
+                        success = await runner.start()
+                        results[symbol] = {"success": success, "status": "started" if success else "failed"}
+                    else:
+                        results[symbol] = {"success": True, "status": "already_running"}
+                else:
+                    results[symbol] = {"success": False, "status": "not_configured"}
+            except Exception as e:
+                print(f"[ERROR] Starting {symbol}: {e}")
+                results[symbol] = {"success": False, "status": "error", "error": str(e)}
+
+        return JSONResponse(content=jsonable_encoder({
+            "ok": True, "interval": interval, "results": results
+        }))
+    except Exception as e:
+        print(f"[ERROR] /trading/start-all: {e}")
+        traceback.print_exc()
+        return JSONResponse(
+            status_code=500,
+            content={"ok": False, "error": str(e)}
+        )
 
 @app.post("/api/v1/trading/stop")
 async def stop_live_trading(symbol: str = None, interval: str = None):
     """Oprește live trading și elimină runner-ul pentru restart fresh"""
-    global _runners
-    if symbol and interval:
-        key = f"{symbol}_{interval}"
-        if key in _runners and _runners[key].running:
-            await _runners[key].stop()
-            del _runners[key]  # Remove runner for fresh start
-            return {"success": True, "symbol": symbol, "interval": interval}
-        return {"success": False, "error": f"{key} not running"}
+    try:
+        global _runners
+        if symbol and interval:
+            key = f"{symbol}_{interval}"
+            if key in _runners and _runners[key].running:
+                await _runners[key].stop()
+                del _runners[key]  # Remove runner for fresh start
+                return JSONResponse(content={"ok": True, "success": True, "symbol": symbol, "interval": interval})
+            return JSONResponse(
+                status_code=404,
+                content={"ok": False, "error": f"{key} not running"}
+            )
 
-    # Stop all and clear runners for fresh start
-    stopped = []
-    for key, runner in list(_runners.items()):
-        if runner.running:
-            await runner.stop()
-            stopped.append(key)
-    _runners.clear()  # Clear all runners for fresh start
+        # Stop all and clear runners for fresh start
+        stopped = []
+        for key, runner in list(_runners.items()):
+            try:
+                if runner.running:
+                    await runner.stop()
+                    stopped.append(key)
+            except Exception as e:
+                print(f"[ERROR] Stopping {key}: {e}")
 
-    return {"success": True, "stopped": stopped}
+        _runners.clear()  # Clear all runners for fresh start
+        return JSONResponse(content={"ok": True, "success": True, "stopped": stopped})
+    except Exception as e:
+        print(f"[ERROR] /trading/stop: {e}")
+        traceback.print_exc()
+        return JSONResponse(
+            status_code=500,
+            content={"ok": False, "error": str(e)}
+        )
 
 @app.get("/api/v1/trading/status")
 async def get_trading_status():
     """Returnează statusul tuturor perechilor active"""
-    runners_status = {}
-    total_balance = 0
+    try:
+        runners_status = {}
+        total_balance = 0
 
-    for key, runner in _runners.items():
-        status = runner.get_status()
-        runners_status[key] = {
-            "symbol": status.get("symbol"),
-            "interval": status.get("interval"),
-            "bar": status.get("current_bar"),
-            "bars_processed": status.get("bars_processed", 0),
-            "topology": status.get("topology"),
-            "predictive": status.get("predictive"),
-            "signals": status.get("signals", []),
-            "stats": status.get("trading_stats")
-        }
-        if runner.trading_manager and runner.trading_manager.connector:
-            total_balance = runner.trading_manager.connector.balance
+        for key, runner in _runners.items():
+            try:
+                status = runner.get_status()
+                runners_status[key] = {
+                    "symbol": status.get("symbol"),
+                    "interval": status.get("interval"),
+                    "bar": status.get("current_bar"),
+                    "bars_processed": status.get("bars_processed", 0),
+                    "topology": status.get("topology"),
+                    "predictive": status.get("predictive"),
+                    "signals": status.get("signals", []),
+                    "stats": status.get("trading_stats")
+                }
+                if runner.trading_manager and runner.trading_manager.connector:
+                    total_balance = runner.trading_manager.connector.balance
+            except Exception as e:
+                print(f"[ERROR] Getting status for {key}: {e}")
+                runners_status[key] = {"error": str(e)}
 
-    if not runners_status:
-        return {"running": False, "runners": {}, "balance": 0}
+        if not runners_status:
+            return JSONResponse(content={"ok": True, "running": False, "runners": {}, "balance": 0})
 
-    return {"running": True, "runners": runners_status, "balance": total_balance}
+        return JSONResponse(content=jsonable_encoder({
+            "ok": True, "running": True, "runners": runners_status, "balance": total_balance
+        }))
+    except Exception as e:
+        print(f"[ERROR] /trading/status: {e}")
+        traceback.print_exc()
+        return JSONResponse(
+            status_code=500,
+            content={"ok": False, "error": str(e)}
+        )
 
 # ============================================
 # WEBSOCKET ENDPOINTS
