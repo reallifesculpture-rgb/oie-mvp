@@ -262,6 +262,7 @@ class LiveTradingRunner:
         # Initialize trading manager - uses defaults from TradingConfig
         config = TradingConfig(
             symbol=self.symbol,
+            timeframe=self.interval,  # Pass timeframe for logging
             leverage=1,
             max_position_value=1000.0,  # Max USD per trade
             # SL/TP/confidence uses defaults from TradingConfig:

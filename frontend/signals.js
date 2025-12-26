@@ -21,6 +21,7 @@ let pollingInterval = null;
 // DOM Elements
 const elements = {
     symbolSelect: null,
+    timeframeFilter: null,
     decisionFilter: null,
     statusBadge: null,
     signalsBody: null,
@@ -33,6 +34,7 @@ const elements = {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     elements.symbolSelect = document.getElementById('symbol-select');
+    elements.timeframeFilter = document.getElementById('timeframe-filter');
     elements.decisionFilter = document.getElementById('decision-filter');
     elements.statusBadge = document.getElementById('status-badge');
     elements.signalsBody = document.getElementById('signals-body');
@@ -49,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchSignals();
     });
 
+    elements.timeframeFilter.addEventListener('change', renderTable);
     elements.decisionFilter.addEventListener('change', renderTable);
 
     // Start polling
@@ -152,21 +155,30 @@ function updateStats(signals) {
 }
 
 function renderTable() {
+    const timeframeFilter = elements.timeframeFilter.value;
     const decisionFilter = elements.decisionFilter.value.toUpperCase();
 
     let filtered = state.signals;
+
+    // Filter by timeframe
+    if (timeframeFilter) {
+        filtered = filtered.filter(s => (s.timeframe || '1m') === timeframeFilter);
+    }
+
+    // Filter by decision
     if (decisionFilter) {
         filtered = filtered.filter(s => (s.decision || '').toUpperCase() === decisionFilter);
     }
 
     if (filtered.length === 0) {
-        elements.signalsBody.innerHTML = '<tr class="empty-row"><td colspan="9">No signals yet...</td></tr>';
+        elements.signalsBody.innerHTML = '<tr class="empty-row"><td colspan="10">No signals yet...</td></tr>';
         return;
     }
 
     elements.signalsBody.innerHTML = filtered.map(signal => {
         const time = formatTime(signal.ts);
         const symbol = signal.symbol || '-';
+        const timeframe = signal.timeframe || '1m';
         const signalType = signal.signal_type || '-';
         const strength = signal.strength != null ? (signal.strength * 100).toFixed(0) + '%' : '-';
         const delta = signal.delta != null ? signal.delta.toFixed(1) : '-';
@@ -182,6 +194,7 @@ function renderTable() {
             <tr>
                 <td class="time">${time}</td>
                 <td class="symbol">${symbol.replace('USDT', '')}</td>
+                <td class="timeframe">${timeframe}</td>
                 <td class="signal ${signalClass}">${signalType}</td>
                 <td class="strength">${strength}</td>
                 <td class="delta">${delta}</td>

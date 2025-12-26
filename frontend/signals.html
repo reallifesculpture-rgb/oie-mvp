@@ -22,6 +22,12 @@
                     <option value="BNBUSDT">BNBUSDT</option>
                     <option value="XRPUSDT">XRPUSDT</option>
                 </select>
+                <select id="timeframe-filter">
+                    <option value="">All TF</option>
+                    <option value="1m">1m</option>
+                    <option value="5m">5m</option>
+                    <option value="15m">15m</option>
+                </select>
                 <select id="decision-filter">
                     <option value="">All Decisions</option>
                     <option value="EXECUTED">Executed</option>
@@ -57,6 +63,7 @@
                     <tr>
                         <th>Time</th>
                         <th>Symbol</th>
+                        <th>TF</th>
                         <th>Signal</th>
                         <th>Strength</th>
                         <th>Delta</th>
@@ -68,7 +75,7 @@
                 </thead>
                 <tbody id="signals-body">
                     <tr class="empty-row">
-                        <td colspan="9">Waiting for signals...</td>
+                        <td colspan="10">Waiting for signals...</td>
                     </tr>
                 </tbody>
             </table>

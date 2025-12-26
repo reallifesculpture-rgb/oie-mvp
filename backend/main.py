@@ -25,7 +25,7 @@ from backend.signals.engine import engine as signals_engine
 # ============================================
 AUTO_START_TRADING = True  # Set to False to disable auto-start
 AUTO_START_SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
-AUTO_START_INTERVAL = "1m"
+AUTO_START_INTERVALS = ["1m", "5m", "15m"]  # Multiple timeframes
 
 # Store runners for different symbol+timeframe combinations (defined early for lifespan)
 _runners = {}
@@ -46,24 +46,31 @@ def get_runner(symbol: str = "BTCUSDT", interval: str = "1m"):
 
 
 async def auto_start_all_symbols():
-    """Auto-start trading for all configured symbols"""
-    print(f"\n[AUTO-START] Starting trading for {len(AUTO_START_SYMBOLS)} symbols...")
+    """Auto-start trading for all configured symbols on all timeframes"""
+    total_runners = len(AUTO_START_SYMBOLS) * len(AUTO_START_INTERVALS)
+    print(f"\n[AUTO-START] Starting {total_runners} runners ({len(AUTO_START_SYMBOLS)} symbols x {len(AUTO_START_INTERVALS)} timeframes)...")
+    print(f"[AUTO-START] Symbols: {', '.join(AUTO_START_SYMBOLS)}")
+    print(f"[AUTO-START] Timeframes: {', '.join(AUTO_START_INTERVALS)}")
 
+    started = 0
     for symbol in AUTO_START_SYMBOLS:
-        try:
-            runner = get_runner(symbol, AUTO_START_INTERVAL)
-            if runner and not runner.running:
-                success = await runner.start()
-                if success:
-                    print(f"[AUTO-START] {symbol} started successfully")
-                else:
-                    print(f"[AUTO-START] {symbol} failed to start")
-            elif runner and runner.running:
-                print(f"[AUTO-START] {symbol} already running")
-        except Exception as e:
-            print(f"[AUTO-START] {symbol} error: {e}")
+        for interval in AUTO_START_INTERVALS:
+            try:
+                runner = get_runner(symbol, interval)
+                if runner and not runner.running:
+                    success = await runner.start()
+                    if success:
+                        print(f"[AUTO-START] {symbol} {interval} started successfully")
+                        started += 1
+                    else:
+                        print(f"[AUTO-START] {symbol} {interval} failed to start")
+                elif runner and runner.running:
+                    print(f"[AUTO-START] {symbol} {interval} already running")
+                    started += 1
+            except Exception as e:
+                print(f"[AUTO-START] {symbol} {interval} error: {e}")
 
-    print(f"[AUTO-START] Initialization complete\n")
+    print(f"[AUTO-START] Initialization complete - {started}/{total_runners} runners active\n")
 
 
 async def stop_all_runners():

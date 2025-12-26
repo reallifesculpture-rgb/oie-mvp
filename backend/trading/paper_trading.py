@@ -38,7 +38,7 @@ load_dotenv()
 @dataclass
 class TradingConfig:
     """Configurație trading - OPTIMIZAT pe baza backtest-ului
-    
+
     Backtest Results (14 zile, delta trend):
     - Win Rate: 63.41%
     - Profit Factor: 2.42
@@ -46,6 +46,7 @@ class TradingConfig:
     - SHORT Win Rate: 58.3%
     """
     symbol: str = "BTCUSDT"
+    timeframe: str = "1m"  # Timeframe pentru logging
     leverage: int = 1
 
     # Risk Management
@@ -70,7 +71,7 @@ class TradingConfig:
     trading_enabled: bool = True
 
 
-@dataclass 
+@dataclass
 class TradeLog:
     """Log entry pentru un trade"""
     timestamp: datetime
@@ -82,14 +83,18 @@ class TradeLog:
     stop_loss: float
     take_profit: float
     order_id: str
+    symbol: str = "BTCUSDT"
+    timeframe: str = "1m"
     status: str = "OPEN"
     exit_price: Optional[float] = None
     exit_time: Optional[datetime] = None
     pnl: float = 0.0
-    
+
     def to_dict(self) -> Dict[str, Any]:
         return {
             'timestamp': self.timestamp.isoformat(),
+            'symbol': self.symbol,
+            'timeframe': self.timeframe,
             'signal_type': self.signal_type,
             'confidence': self.confidence,
             'direction': self.direction,
@@ -242,6 +247,8 @@ class PaperTradingManager:
                 stop_loss=expected_sl,  # Calculate from config
                 take_profit=expected_tp,  # Calculate from config
                 order_id="synced",
+                symbol=self.config.symbol,
+                timeframe=self.config.timeframe,
                 status="OPEN"
             )
 
@@ -442,7 +449,9 @@ class PaperTradingManager:
                 quantity=quantity,
                 stop_loss=stop_loss,
                 take_profit=take_profit,
-                order_id=result.order_id
+                order_id=result.order_id,
+                symbol=self.config.symbol,
+                timeframe=self.config.timeframe
             )
 
             self._log_trade(self.current_trade, "OPENED")
@@ -452,7 +461,7 @@ class PaperTradingManager:
                 id=str(uuid.uuid4()),
                 ts=datetime.now().isoformat(),
                 symbol=self.config.symbol,
-                timeframe="1m",  # Default, could be passed in
+                timeframe=self.config.timeframe,
                 side='BUY' if is_long else 'SELL',
                 action='OPEN',
                 qty=quantity,
@@ -505,7 +514,7 @@ class PaperTradingManager:
                 id=str(uuid.uuid4()),
                 ts=datetime.now().isoformat(),
                 symbol=self.config.symbol,
-                timeframe="1m",
+                timeframe=self.config.timeframe,
                 side='SELL' if self.current_trade.direction == 'LONG' else 'BUY',
                 action='CLOSE',
                 qty=self.current_trade.quantity,
@@ -562,7 +571,7 @@ class PaperTradingManager:
                 id=str(uuid.uuid4()),
                 ts=datetime.now().isoformat(),
                 symbol=self.config.symbol,
-                timeframe="1m",
+                timeframe=self.config.timeframe,
                 side='SELL' if self.current_trade.direction == 'LONG' else 'BUY',
                 action=action,
                 qty=self.current_trade.quantity,
@@ -644,7 +653,7 @@ class PaperTradingManager:
                 id=str(uuid.uuid4()),
                 ts=datetime.now().isoformat(),
                 symbol=self.config.symbol,
-                timeframe="1m",
+                timeframe=self.config.timeframe,
                 side='SELL' if self.current_trade.direction == 'LONG' else 'BUY',
                 action=action,
                 qty=self.current_trade.quantity,
