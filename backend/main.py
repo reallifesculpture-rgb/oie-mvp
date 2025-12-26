@@ -122,6 +122,40 @@ async def serve_signals_css():
         return FileResponse(css_path, media_type="text/css")
     return {"error": "signals.css not found"}
 
+@app.get("/trades")
+async def serve_trades_page():
+    """Serve the trades history page"""
+    trades_path = os.path.join(FRONTEND_DIR, "trades.html")
+    if os.path.exists(trades_path):
+        return FileResponse(trades_path)
+    return {"error": "Trades page not found"}
+
+@app.get("/trades.js")
+async def serve_trades_js():
+    """Serve trades.js with no-cache headers"""
+    js_path = os.path.join(FRONTEND_DIR, "trades.js")
+    if os.path.exists(js_path):
+        with open(js_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        return Response(
+            content=content,
+            media_type="application/javascript",
+            headers={
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        )
+    return {"error": "trades.js not found"}
+
+@app.get("/trades.css")
+async def serve_trades_css():
+    """Serve trades.css"""
+    css_path = os.path.join(FRONTEND_DIR, "trades.css")
+    if os.path.exists(css_path):
+        return FileResponse(css_path, media_type="text/css")
+    return {"error": "trades.css not found"}
+
 # ============================================
 # LIVE TRADING ENDPOINTS
 # ============================================

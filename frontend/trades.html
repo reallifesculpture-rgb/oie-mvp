@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OIE Trade History</title>
+    <link rel="stylesheet" href="/trades.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>OIE Trade History</h1>
+                <a href="/" class="back-link">&larr; Back to Dashboard</a>
+            </div>
+            <div class="header-right">
+                <select id="symbol-select">
+                    <option value="">All Symbols</option>
+                    <option value="BTCUSDT">BTCUSDT</option>
+                    <option value="ETHUSDT">ETHUSDT</option>
+                    <option value="SOLUSDT">SOLUSDT</option>
+                    <option value="BNBUSDT">BNBUSDT</option>
+                    <option value="XRPUSDT">XRPUSDT</option>
+                </select>
+                <select id="action-filter">
+                    <option value="">All Actions</option>
+                    <option value="OPEN">Open</option>
+                    <option value="CLOSE">Close</option>
+                    <option value="STOP_LOSS">Stop Loss</option>
+                    <option value="TAKE_PROFIT">Take Profit</option>
+                </select>
+                <label class="today-toggle">
+                    <input type="checkbox" id="today-only">
+                    Today Only
+                </label>
+                <span id="status-badge" class="status-badge disconnected">Connecting...</span>
+            </div>
+        </header>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-label">Total Trades</div>
+                <div class="stat-value" id="stat-total">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Winning</div>
+                <div class="stat-value winning" id="stat-winning">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Losing</div>
+                <div class="stat-value losing" id="stat-losing">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Win Rate</div>
+                <div class="stat-value" id="stat-winrate">0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total PnL</div>
+                <div class="stat-value" id="stat-pnl">$0.00</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Net PnL</div>
+                <div class="stat-value" id="stat-net">$0.00</div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="trades-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Symbol</th>
+                        <th>Side</th>
+                        <th>Action</th>
+                        <th>Qty</th>
+                        <th>Entry</th>
+                        <th>Exit</th>
+                        <th>PnL</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody id="trades-body">
+                    <tr class="empty-row">
+                        <td colspan="9">Loading trades...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/trades.js"></script>
+</body>
+</html>
