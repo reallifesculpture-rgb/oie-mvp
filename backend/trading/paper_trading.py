@@ -60,10 +60,11 @@ class TradingConfig:
     min_confidence: float = 0.62     # Minimum signal confidence (62% - mărită de la 60%)
 
     # Reversal Protection - prevent premature position closures
-    min_reversal_confidence: float = 0.62   # Need 62%+ confidence to reverse
-    reversal_cooldown_minutes: float = 10.0  # Don't reverse within 10 min of opening
+    min_reversal_confidence: float = 0.70   # Need 70%+ confidence to reverse (was 62%)
+    reversal_cooldown_minutes: float = 25.0  # Don't reverse within 25 min of opening (was 10)
     protect_profitable_positions: bool = True  # Don't reverse if position is profitable
     never_reverse_in_profit: bool = True  # NEVER reverse if position is profitable (strict mode)
+    min_loss_before_reversal: float = 0.3  # Minimum loss % before allowing reversal (new)
 
     # Trading Hours (optional)
     trading_enabled: bool = True
@@ -162,6 +163,7 @@ class PaperTradingManager:
         print(f"      - Min confidence for reversal: {self.config.min_reversal_confidence:.0%}")
         print(f"      - Cooldown after open: {self.config.reversal_cooldown_minutes} min")
         print(f"      - Never reverse in profit: {self.config.never_reverse_in_profit}")
+        print(f"      - Min loss before reversal: {self.config.min_loss_before_reversal}%")
         if self.current_trade:
             print(f"   [SYNC] Existing position: {self.current_trade.direction} @ ${self.current_trade.entry_price:,.2f}")
 
@@ -184,23 +186,27 @@ class PaperTradingManager:
             if time_since_open < self.config.reversal_cooldown_minutes:
                 return False, f"cooldown active ({time_since_open:.1f}min < {self.config.reversal_cooldown_minutes}min)"
 
-        # 3. Check if position is profitable
-        if current_position.unrealized_pnl > 0:
-            entry = current_position.entry_price
-            current = await self.connector.get_price(self.config.symbol)
+        # 3. Check position PnL
+        entry = current_position.entry_price
+        current = await self.connector.get_price(self.config.symbol)
 
-            if current_position.side == 'LONG':
-                profit_pct = ((current - entry) / entry) * 100
-            else:
-                profit_pct = ((entry - current) / entry) * 100
+        if current_position.side == 'LONG':
+            pnl_pct = ((current - entry) / entry) * 100
+        else:
+            pnl_pct = ((entry - current) / entry) * 100
 
-            # STRICT MODE: Never reverse if in profit - let TP/SL handle it
-            if self.config.never_reverse_in_profit:
-                return False, f"in profit ({profit_pct:.2f}%) - waiting for TP/SL"
+        # STRICT MODE: Never reverse if in profit - let TP/SL handle it
+        if pnl_pct > 0 and self.config.never_reverse_in_profit:
+            return False, f"in profit ({pnl_pct:.2f}%) - waiting for TP/SL"
 
-            # SOFT MODE: Allow reversal only if very close to entry (< 0.5% profit)
-            if self.config.protect_profitable_positions and profit_pct > 0.5:
-                return False, f"profitable ({profit_pct:.2f}%) - waiting for TP/SL"
+        # SOFT MODE: Allow reversal only if very close to entry (< 0.5% profit)
+        if pnl_pct > 0 and self.config.protect_profitable_positions and pnl_pct > 0.5:
+            return False, f"profitable ({pnl_pct:.2f}%) - waiting for TP/SL"
+
+        # 4. Check minimum loss threshold before allowing reversal
+        # Don't reverse if position is in small loss - wait for clearer signal
+        if pnl_pct < 0 and abs(pnl_pct) < self.config.min_loss_before_reversal:
+            return False, f"small loss ({pnl_pct:.2f}%) - need {self.config.min_loss_before_reversal}% loss or wait for SL"
 
         return True, ""
 

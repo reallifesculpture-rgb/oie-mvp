@@ -389,9 +389,10 @@ class BinanceTestnetConnector:
             # 1. Try avgPrice from response (may not always be present for MARKET orders)
             if 'avgPrice' in data and float(data['avgPrice']) > 0:
                 exec_price = float(data['avgPrice'])
+                print(f"   [DEBUG] Got price from avgPrice: ${exec_price:,.2f}")
 
             # 2. If not, calculate from fills (if present)
-            elif 'fills' in data and len(data['fills']) > 0:
+            if exec_price == 0 and 'fills' in data and len(data['fills']) > 0:
                 total_qty = 0.0
                 total_value = 0.0
                 for fill in data['fills']:
@@ -401,20 +402,33 @@ class BinanceTestnetConnector:
                     total_value += qty * price
                 if total_qty > 0:
                     exec_price = total_value / total_qty
+                    print(f"   [DEBUG] Got price from fills: ${exec_price:,.2f}")
 
-            # 3. If still no price, query the order status to get avgPrice
+            # 3. If still no price, query the order status to get avgPrice (with retry)
             if exec_price == 0:
-                await asyncio.sleep(0.5)  # Small delay for order to be processed
-                order_data = await self._request('GET', '/fapi/v1/order', {
-                    'symbol': symbol,
-                    'orderId': order_id
-                }, signed=True)
-                if 'avgPrice' in order_data:
-                    exec_price = float(order_data['avgPrice'])
+                for attempt in range(3):
+                    await asyncio.sleep(0.5 * (attempt + 1))  # Increasing delay: 0.5s, 1s, 1.5s
+                    order_data = await self._request('GET', '/fapi/v1/order', {
+                        'symbol': symbol,
+                        'orderId': order_id
+                    }, signed=True)
+                    if 'avgPrice' in order_data and float(order_data['avgPrice']) > 0:
+                        exec_price = float(order_data['avgPrice'])
+                        print(f"   [DEBUG] Got price from order query (attempt {attempt+1}): ${exec_price:,.2f}")
+                        break
 
-            # 4. Fallback: get current market price
+            # 4. Query the position for entry price (most reliable for futures)
+            if exec_price == 0:
+                await asyncio.sleep(0.3)
+                position = await self.get_position(symbol)
+                if position and position.entry_price > 0:
+                    exec_price = position.entry_price
+                    print(f"   [DEBUG] Got price from position: ${exec_price:,.2f}")
+
+            # 5. Final fallback: get current market price (ALWAYS do this if price is still 0)
             if exec_price == 0:
                 exec_price = await self.get_price(symbol)
+                print(f"   [WARNING] Using market price as fallback: ${exec_price:,.2f}")
 
             result = TradeResult(
                 success=True,
@@ -514,9 +528,10 @@ class BinanceTestnetConnector:
             # 1. Try avgPrice from response
             if 'avgPrice' in data and float(data['avgPrice']) > 0:
                 exec_price = float(data['avgPrice'])
+                print(f"   [DEBUG] Close price from avgPrice: ${exec_price:,.2f}")
 
             # 2. Calculate from fills if present
-            elif 'fills' in data and len(data['fills']) > 0:
+            if exec_price == 0 and 'fills' in data and len(data['fills']) > 0:
                 total_qty = 0.0
                 total_value = 0.0
                 for fill in data['fills']:
@@ -526,20 +541,25 @@ class BinanceTestnetConnector:
                     total_value += qty * price
                 if total_qty > 0:
                     exec_price = total_value / total_qty
+                    print(f"   [DEBUG] Close price from fills: ${exec_price:,.2f}")
 
-            # 3. Query order status for avgPrice
+            # 3. Query order status for avgPrice (with retry)
             if exec_price == 0:
-                await asyncio.sleep(0.5)
-                order_data = await self._request('GET', '/fapi/v1/order', {
-                    'symbol': symbol,
-                    'orderId': order_id
-                }, signed=True)
-                if 'avgPrice' in order_data:
-                    exec_price = float(order_data['avgPrice'])
+                for attempt in range(3):
+                    await asyncio.sleep(0.5 * (attempt + 1))
+                    order_data = await self._request('GET', '/fapi/v1/order', {
+                        'symbol': symbol,
+                        'orderId': order_id
+                    }, signed=True)
+                    if 'avgPrice' in order_data and float(order_data['avgPrice']) > 0:
+                        exec_price = float(order_data['avgPrice'])
+                        print(f"   [DEBUG] Close price from order query (attempt {attempt+1}): ${exec_price:,.2f}")
+                        break
 
-            # 4. Fallback to current price
+            # 4. Fallback to current price (ALWAYS if still 0)
             if exec_price == 0:
                 exec_price = await self.get_price(symbol)
+                print(f"   [WARNING] Close using market price as fallback: ${exec_price:,.2f}")
 
             # Calculate PnL
             pnl = (exec_price - position.entry_price) * position.quantity

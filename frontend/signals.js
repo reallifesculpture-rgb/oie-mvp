@@ -106,17 +106,24 @@ function updateStatus(connected, errorMsg = null) {
 }
 
 function processSignals(signals) {
-    // Process newest first (API returns newest first)
+    // Add new signals that we haven't seen yet
     for (const signal of signals) {
         const id = signal.id || `${signal.ts}_${signal.symbol}_${signal.signal_type}`;
 
         if (state.seenIds.has(id)) continue;
 
         state.seenIds.add(id);
-        state.signals.unshift(signal);
+        state.signals.push(signal);
     }
 
-    // Keep only MAX_SIGNALS
+    // Sort by timestamp descending (newest first) - ALWAYS sort for consistent display
+    state.signals.sort((a, b) => {
+        const tsA = a.ts || '';
+        const tsB = b.ts || '';
+        return tsB.localeCompare(tsA);  // Descending order (newest first)
+    });
+
+    // Keep only MAX_SIGNALS (remove oldest from end)
     if (state.signals.length > MAX_SIGNALS) {
         const removed = state.signals.splice(MAX_SIGNALS);
         for (const sig of removed) {
