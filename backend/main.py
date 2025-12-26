@@ -235,6 +235,26 @@ async def get_trading_status():
         for key, runner in _runners.items():
             try:
                 status = runner.get_status()
+                trading_stats = status.get("trading_stats") or {}
+
+                # Include current_position in stats if exists
+                if runner.trading_manager and runner.trading_manager.current_trade:
+                    trade = runner.trading_manager.current_trade
+                    current_price = 0
+                    if runner.data_feed and runner.data_feed.current_bar:
+                        current_price = runner.data_feed.current_bar.close
+
+                    trading_stats["current_position"] = {
+                        "direction": trade.direction,
+                        "entry_price": trade.entry_price,
+                        "quantity": trade.quantity,
+                        "stop_loss": trade.stop_loss,
+                        "take_profit": trade.take_profit,
+                        "current_price": current_price,
+                        "order_id": trade.order_id,
+                        "timestamp": trade.timestamp.isoformat() if trade.timestamp else None
+                    }
+
                 runners_status[key] = {
                     "symbol": status.get("symbol"),
                     "interval": status.get("interval"),
@@ -243,7 +263,7 @@ async def get_trading_status():
                     "topology": status.get("topology"),
                     "predictive": status.get("predictive"),
                     "signals": status.get("signals", []),
-                    "stats": status.get("trading_stats")
+                    "stats": trading_stats
                 }
                 if runner.trading_manager and runner.trading_manager.connector:
                     total_balance = runner.trading_manager.connector.balance
