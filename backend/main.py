@@ -88,6 +88,40 @@ async def serve_js():
 def health_check():
     return {"status": "ok"}
 
+@app.get("/signals")
+async def serve_signals_page():
+    """Serve the signals monitoring page"""
+    signals_path = os.path.join(FRONTEND_DIR, "signals.html")
+    if os.path.exists(signals_path):
+        return FileResponse(signals_path)
+    return {"error": "Signals page not found"}
+
+@app.get("/signals.js")
+async def serve_signals_js():
+    """Serve signals.js with no-cache headers"""
+    js_path = os.path.join(FRONTEND_DIR, "signals.js")
+    if os.path.exists(js_path):
+        with open(js_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        return Response(
+            content=content,
+            media_type="application/javascript",
+            headers={
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        )
+    return {"error": "signals.js not found"}
+
+@app.get("/signals.css")
+async def serve_signals_css():
+    """Serve signals.css"""
+    css_path = os.path.join(FRONTEND_DIR, "signals.css")
+    if os.path.exists(css_path):
+        return FileResponse(css_path, media_type="text/css")
+    return {"error": "signals.css not found"}
+
 # ============================================
 # LIVE TRADING ENDPOINTS
 # ============================================

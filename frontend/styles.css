@@ -163,6 +163,21 @@ body {
     background: #15803d;
 }
 
+.btn-signals {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #6366f1;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-signals:hover {
+    background: #4f46e5;
+}
+
 /* Symbols Grid */
 .symbols-grid {
     display: flex;

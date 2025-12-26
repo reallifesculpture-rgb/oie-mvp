@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OIE Signals Monitor</title>
+    <link rel="stylesheet" href="/signals.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>OIE Signals Monitor</h1>
+                <a href="/" class="back-link">&larr; Back to Dashboard</a>
+            </div>
+            <div class="header-right">
+                <select id="symbol-select">
+                    <option value="ALL">All Symbols</option>
+                    <option value="BTCUSDT">BTCUSDT</option>
+                    <option value="ETHUSDT">ETHUSDT</option>
+                    <option value="SOLUSDT">SOLUSDT</option>
+                    <option value="BNBUSDT">BNBUSDT</option>
+                    <option value="XRPUSDT">XRPUSDT</option>
+                </select>
+                <select id="decision-filter">
+                    <option value="">All Decisions</option>
+                    <option value="EXECUTED">Executed</option>
+                    <option value="IGNORED">Ignored</option>
+                    <option value="BLOCKED">Blocked</option>
+                </select>
+                <span id="status-badge" class="status-badge disconnected">Connecting...</span>
+            </div>
+        </header>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-label">Total Signals</div>
+                <div class="stat-value" id="stat-total">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Executed</div>
+                <div class="stat-value executed" id="stat-executed">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Ignored</div>
+                <div class="stat-value ignored" id="stat-ignored">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Blocked</div>
+                <div class="stat-value blocked" id="stat-blocked">0</div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="signals-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Symbol</th>
+                        <th>Signal</th>
+                        <th>Strength</th>
+                        <th>Delta</th>
+                        <th>IFI</th>
+                        <th>Vortex</th>
+                        <th>Decision</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody id="signals-body">
+                    <tr class="empty-row">
+                        <td colspan="9">Waiting for signals...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/signals.js"></script>
+</body>
+</html>
