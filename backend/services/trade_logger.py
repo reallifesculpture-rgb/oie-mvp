@@ -25,6 +25,7 @@ class TradeEvent:
     pnl: float = 0.0                 # Realized PnL
     fees: float = 0.0                # Trading fees
     reason: str = ""                 # Signal reason (e.g., "momentum_breakout")
+    signal_id: Optional[str] = None  # Linked signal ID
     meta: Dict[str, Any] = field(default_factory=dict)  # Additional metadata
 
     def to_dict(self) -> Dict[str, Any]:

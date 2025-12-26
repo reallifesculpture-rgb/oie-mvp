@@ -292,10 +292,10 @@ class PaperTradingManager:
     async def process_signal(self, signal: Dict[str, Any]) -> Optional[TradeResult]:
         """
         Procesează un semnal de la OIE
-        
+
         Args:
-            signal: Dict cu 'type', 'confidence', 'timestamp'
-            
+            signal: Dict cu 'type', 'confidence', 'timestamp', 'signal_id' (optional)
+
         Returns:
             TradeResult dacă s-a executat un trade
         """
@@ -305,6 +305,7 @@ class PaperTradingManager:
 
         signal_type = signal.get('type', '')
         confidence = signal.get('confidence', 0)
+        signal_id = signal.get('signal_id')  # For linking trade to signal
 
         print(f"[SIGNAL] Processing: {signal_type} with confidence {confidence:.2f} (min: {self.config.min_confidence})")
 
@@ -451,6 +452,7 @@ class PaperTradingManager:
                 qty=quantity,
                 entry_price=actual_entry_price,
                 reason=signal_type,
+                signal_id=signal_id,  # Link to triggering signal
                 meta={'confidence': confidence, 'order_id': result.order_id}
             )
             asyncio.create_task(self.trade_logger.log_event(trade_event))
