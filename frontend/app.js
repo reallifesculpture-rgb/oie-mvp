@@ -24,7 +24,9 @@ const state = {
     barsNeeded: 20,
     // Multi-symbol tracking
     activeSymbols: {},
-    runners: {}
+    runners: {},
+    // Trade deduplication
+    seenTradeIds: new Set()
 };
 
 let pollingInterval = null;
@@ -341,6 +343,57 @@ async function fetchTradingStatus() {
     }
 }
 
+async function fetchLatestTrade(symbol) {
+    try {
+        const resp = await fetch(`${API_BASE}/api/v1/trades?symbol=${symbol}&limit=5`);
+        if (!resp.ok) return null;
+        const data = await resp.json();
+        if (!data.ok || !data.trades || data.trades.length === 0) return null;
+        return data.trades; // Return array of recent trades
+    } catch (e) {
+        console.error('Trade fetch error:', e);
+        return null;
+    }
+}
+
+function getTradeKey(trade) {
+    // Generate unique key for deduplication
+    return trade.id || `${trade.ts}_${trade.symbol}_${trade.side}_${trade.entry_price}_${trade.exit_price}`;
+}
+
+async function handleNewTradeDetected(symbol) {
+    const trades = await fetchLatestTrade(symbol);
+    if (!trades) return;
+
+    // Process trades (newest first, but we want to add oldest first to maintain order)
+    const closedTrades = trades.filter(t => t.action === 'CLOSE' || t.action === 'STOP_LOSS' || t.action === 'TAKE_PROFIT');
+
+    for (const trade of closedTrades.reverse()) {
+        const tradeKey = getTradeKey(trade);
+
+        // Skip if already seen
+        if (state.seenTradeIds.has(tradeKey)) continue;
+        state.seenTradeIds.add(tradeKey);
+
+        // Keep set bounded
+        if (state.seenTradeIds.size > 200) {
+            const firstKey = state.seenTradeIds.values().next().value;
+            state.seenTradeIds.delete(firstKey);
+        }
+
+        // Map backend fields to addTrade format
+        const formattedTrade = {
+            exitTime: trade.ts,
+            direction: trade.side === 'SELL' ? 'LONG' : 'SHORT', // Closing a LONG = SELL
+            entryPrice: trade.entry_price,
+            exitPrice: trade.exit_price,
+            pnl: trade.pnl || 0
+        };
+
+        addTrade(formattedTrade);
+    }
+}
+
 // ============================================
 // REST POLLING (replaces WebSocket)
 // ============================================
@@ -398,9 +451,13 @@ function handleStatusUpdate(data) {
             // Check for new trades
             if (runner.stats && prevRunner?.stats) {
                 if (runner.stats.total_trades > prevRunner.stats.total_trades) {
-                    // New trade detected - could fetch trade details if available
+                    // New trade detected - fetch and display
+                    const symbol = key.split('_')[0];
                     const pnlDiff = (runner.stats.total_pnl || 0) - (prevRunner.stats.total_pnl || 0);
-                    addLog(pnlDiff >= 0 ? 'long' : 'short', `[TRADE] ${key.split('_')[0]}: ${pnlDiff >= 0 ? '+' : ''}${fmt.price(pnlDiff)}`);
+                    addLog(pnlDiff >= 0 ? 'long' : 'short', `[TRADE] ${symbol}: ${pnlDiff >= 0 ? '+' : ''}${fmt.price(pnlDiff)}`);
+
+                    // Fetch latest trade and add to table
+                    handleNewTradeDetected(symbol);
                 }
             }
 
@@ -496,6 +553,11 @@ async function connect() {
     // Start polling for status updates
     state.connected = true;
     startPolling();
+
+    // Load initial trades for all symbols
+    for (const sym of SYMBOLS) {
+        handleNewTradeDetected(sym);
+    }
 }
 
 function disconnect() {
