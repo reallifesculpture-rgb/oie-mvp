@@ -77,70 +77,97 @@ class BinanceLiveDataFeed:
     """
     Feed de date live de la Binance WebSocket
     Agregrează tick data în bare de 1 minut
+    Cu auto-reconnect pentru conexiuni stabile
     """
-    
+
     WS_URL = "wss://fstream.binance.com/ws"
-    
+    RECONNECT_DELAY = 5  # Seconds between reconnect attempts
+    MAX_RECONNECT_DELAY = 60  # Max delay between attempts
+
     def __init__(self, symbol: str = "btcusdt", interval: str = "1m"):
         self.symbol = symbol.lower()
         self.interval = interval
         self.ws = None
         self.session = None
-        
+
         self.current_bar: Optional[LiveBar] = None
         self.bars: deque = deque(maxlen=200)  # Keep last 200 bars
-        
+
         self.callbacks: List[callable] = []
         self.running = False
-    
+        self.connected = False
+        self.reconnect_count = 0
+        self.last_message_time: Optional[datetime] = None
+
     def on_bar(self, callback: callable):
         """Înregistrează callback pentru bare noi"""
         self.callbacks.append(callback)
-    
+
     async def start(self):
-        """Pornește feed-ul de date"""
+        """Pornește feed-ul de date cu auto-reconnect"""
         print(f"[DATA] Starting live data feed for {self.symbol.upper()}...")
-        print(f"[DATA] WebSocket URL: {self.WS_URL}/{self.symbol}@kline_{self.interval}")
-
-        try:
-            self.session = aiohttp.ClientSession()
-        except Exception as e:
-            print(f"[ERROR] Failed to create session: {e}")
-            return
-
         self.running = True
 
-        # Subscribe la kline stream
+        while self.running:
+            try:
+                await self._connect_and_listen()
+            except Exception as e:
+                if not self.running:
+                    break
+                self.connected = False
+                self.reconnect_count += 1
+                delay = min(self.RECONNECT_DELAY * self.reconnect_count, self.MAX_RECONNECT_DELAY)
+                print(f"[RECONNECT] {self.symbol.upper()} connection lost: {e}")
+                print(f"[RECONNECT] Attempt {self.reconnect_count} in {delay}s...")
+                await asyncio.sleep(delay)
+
+        await self._cleanup()
+
+    async def _connect_and_listen(self):
+        """Conectează și ascultă stream-ul WebSocket"""
+        if self.session is None or self.session.closed:
+            self.session = aiohttp.ClientSession()
+
         stream = f"{self.symbol}@kline_{self.interval}"
         url = f"{self.WS_URL}/{stream}"
 
-        try:
-            print(f"[DATA] Connecting to WebSocket...")
-            async with self.session.ws_connect(url, timeout=10) as ws:
-                self.ws = ws
-                print(f"[OK] Connected to Binance {self.symbol.upper()} {self.interval} stream")
-                
-                async for msg in ws:
-                    if not self.running:
-                        break
-                    
-                    if msg.type == aiohttp.WSMsgType.TEXT:
-                        await self._handle_message(json.loads(msg.data))
-                    elif msg.type == aiohttp.WSMsgType.ERROR:
-                        print(f"WebSocket error: {msg.data}")
-                        break
-        
-        except Exception as e:
-            print(f"[ERROR] Data feed error: {e}")
-        finally:
-            await self.stop()
-    
+        print(f"[DATA] Connecting to {url}...")
+
+        async with self.session.ws_connect(url, timeout=30, heartbeat=20) as ws:
+            self.ws = ws
+            self.connected = True
+            self.reconnect_count = 0  # Reset on successful connect
+            print(f"[OK] Connected to Binance {self.symbol.upper()} {self.interval} stream")
+
+            async for msg in ws:
+                if not self.running:
+                    break
+
+                self.last_message_time = datetime.now()
+
+                if msg.type == aiohttp.WSMsgType.TEXT:
+                    await self._handle_message(json.loads(msg.data))
+                elif msg.type == aiohttp.WSMsgType.ERROR:
+                    print(f"[ERROR] WebSocket error: {msg.data}")
+                    break
+                elif msg.type == aiohttp.WSMsgType.CLOSED:
+                    print(f"[WARN] WebSocket closed by server")
+                    break
+
+    async def _cleanup(self):
+        """Curăță resursele"""
+        self.connected = False
+        if self.session and not self.session.closed:
+            await self.session.close()
+        self.session = None
+        self.ws = None
+
     async def stop(self):
         """Oprește feed-ul"""
         self.running = False
-        if self.session:
-            await self.session.close()
-        print("[DATA] Data feed stopped")
+        self.connected = False
+        await self._cleanup()
+        print(f"[DATA] {self.symbol.upper()} data feed stopped")
     
     async def _handle_message(self, data: Dict):
         """Procesează mesaj de la WebSocket"""
@@ -183,14 +210,18 @@ class BinanceLiveDataFeed:
 class LiveTradingRunner:
     """
     Runner principal pentru trading live
-    
+
     Integrează:
     - Date live de la Binance
     - Engine-uri OIE
     - Paper trading pe Testnet
     - Broadcast la frontend
+    - Health monitoring cu auto-recovery
     """
-    
+
+    HEALTH_CHECK_INTERVAL = 30  # Check health every 30 seconds
+    DATA_TIMEOUT = 120  # Consider stale if no data for 2 minutes
+
     def __init__(self, symbol: str = "BTCUSDT", interval: str = "1m"):
         self.symbol = symbol
         self.interval = interval
@@ -213,6 +244,10 @@ class LiveTradingRunner:
         self.bars_processed = 0
         self.signals_generated = 0
         self.trades_executed = 0
+
+        # Health monitoring
+        self._health_task: Optional[asyncio.Task] = None
+        self._last_bar_time: Optional[datetime] = None
     
     async def start(self):
         """Porneste live trading"""
@@ -258,23 +293,119 @@ class LiveTradingRunner:
 
         asyncio.create_task(run_data_feed())
 
+        # Start health monitor
+        self._health_task = asyncio.create_task(self._health_monitor())
+
         print("\n[OK] Live trading started!")
         print("   Waiting for signals...\n")
-        
+
         return True
+
+    async def _health_monitor(self):
+        """Monitor health and auto-recover connections"""
+        print(f"[HEALTH] {self.symbol} health monitor started")
+
+        while self.running:
+            try:
+                await asyncio.sleep(self.HEALTH_CHECK_INTERVAL)
+
+                if not self.running:
+                    break
+
+                # Check data feed health
+                data_ok = self._check_data_feed_health()
+                trading_ok = self._check_trading_health()
+
+                if not data_ok:
+                    print(f"[HEALTH] {self.symbol} data feed unhealthy - attempting recovery...")
+                    await self._recover_data_feed()
+
+                if not trading_ok:
+                    print(f"[HEALTH] {self.symbol} trading connection unhealthy - attempting recovery...")
+                    await self._recover_trading()
+
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                print(f"[HEALTH] {self.symbol} monitor error: {e}")
+
+        print(f"[HEALTH] {self.symbol} health monitor stopped")
+
+    def _check_data_feed_health(self) -> bool:
+        """Check if data feed is healthy"""
+        if not self.data_feed:
+            return False
+
+        # Check if connected
+        if not self.data_feed.connected:
+            return False
+
+        # Check if receiving data (last message within timeout)
+        if self.data_feed.last_message_time:
+            elapsed = (datetime.now() - self.data_feed.last_message_time).total_seconds()
+            if elapsed > self.DATA_TIMEOUT:
+                print(f"[HEALTH] {self.symbol} no data for {elapsed:.0f}s")
+                return False
+
+        return True
+
+    def _check_trading_health(self) -> bool:
+        """Check if trading connection is healthy"""
+        if not self.trading_manager:
+            return False
+
+        if not self.trading_manager.connector:
+            return False
+
+        if not self.trading_manager.connector.connected:
+            return False
+
+        return True
+
+    async def _recover_data_feed(self):
+        """Attempt to recover data feed connection"""
+        try:
+            if self.data_feed:
+                # Force reconnect by marking as not connected
+                # The auto-reconnect in BinanceLiveDataFeed will handle it
+                self.data_feed.connected = False
+                print(f"[RECOVER] {self.symbol} data feed recovery initiated")
+        except Exception as e:
+            print(f"[RECOVER] {self.symbol} data feed recovery failed: {e}")
+
+    async def _recover_trading(self):
+        """Attempt to recover trading connection"""
+        try:
+            if self.trading_manager and self.trading_manager.connector:
+                # Try to reconnect
+                connected = await self.trading_manager.connector.connect()
+                if connected:
+                    print(f"[RECOVER] {self.symbol} trading connection restored")
+                else:
+                    print(f"[RECOVER] {self.symbol} trading reconnect failed")
+        except Exception as e:
+            print(f"[RECOVER] {self.symbol} trading recovery failed: {e}")
     
     async def stop(self):
         """Opreste live trading"""
         print("\n[STOP] Stopping live trading...")
-        
+
         self.running = False
-        
+
+        # Stop health monitor
+        if self._health_task and not self._health_task.done():
+            self._health_task.cancel()
+            try:
+                await self._health_task
+            except asyncio.CancelledError:
+                pass
+
         if self.data_feed:
             await self.data_feed.stop()
-        
+
         if self.trading_manager:
             await self.trading_manager.stop()
-        
+
         print("[OK] Live trading stopped")
         self._print_summary()
     

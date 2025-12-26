@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, Response, JSONResponse
 from fastapi.encoders import jsonable_encoder
+from contextlib import asynccontextmanager
 import asyncio
 import os
 import traceback
@@ -18,7 +19,88 @@ from backend.topology.engine import engine as topology_engine
 from backend.predictive.engine import engine as predictive_engine
 from backend.signals.engine import engine as signals_engine
 
-app = FastAPI(title="OIE MVP API", version="1.0.0")
+
+# ============================================
+# AUTO-START CONFIGURATION
+# ============================================
+AUTO_START_TRADING = True  # Set to False to disable auto-start
+AUTO_START_SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
+AUTO_START_INTERVAL = "1m"
+
+# Store runners for different symbol+timeframe combinations (defined early for lifespan)
+_runners = {}
+
+
+def get_runner(symbol: str = "BTCUSDT", interval: str = "1m"):
+    """Get or create runner for specific symbol and interval"""
+    global _runners
+    key = f"{symbol}_{interval}"
+    if key not in _runners:
+        try:
+            from backend.trading.live_runner import LiveTradingRunner
+            _runners[key] = LiveTradingRunner(symbol=symbol, interval=interval)
+        except Exception as e:
+            print(f"Warning: Could not initialize {key} runner: {e}")
+            return None
+    return _runners[key]
+
+
+async def auto_start_all_symbols():
+    """Auto-start trading for all configured symbols"""
+    print(f"\n[AUTO-START] Starting trading for {len(AUTO_START_SYMBOLS)} symbols...")
+
+    for symbol in AUTO_START_SYMBOLS:
+        try:
+            runner = get_runner(symbol, AUTO_START_INTERVAL)
+            if runner and not runner.running:
+                success = await runner.start()
+                if success:
+                    print(f"[AUTO-START] {symbol} started successfully")
+                else:
+                    print(f"[AUTO-START] {symbol} failed to start")
+            elif runner and runner.running:
+                print(f"[AUTO-START] {symbol} already running")
+        except Exception as e:
+            print(f"[AUTO-START] {symbol} error: {e}")
+
+    print(f"[AUTO-START] Initialization complete\n")
+
+
+async def stop_all_runners():
+    """Stop all active runners on shutdown"""
+    global _runners
+    for key, runner in list(_runners.items()):
+        try:
+            if runner.running:
+                await runner.stop()
+                print(f"[SHUTDOWN] {key} stopped")
+        except Exception as e:
+            print(f"[SHUTDOWN] Error stopping {key}: {e}")
+    _runners.clear()
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifecycle manager - auto-start trading on server startup"""
+    print("\n" + "=" * 60)
+    print("[STARTUP] OIE MVP Server Starting...")
+    print("=" * 60)
+
+    # Auto-start trading if enabled
+    if AUTO_START_TRADING:
+        # Small delay to let FastAPI fully initialize
+        await asyncio.sleep(2)
+        await auto_start_all_symbols()
+
+    yield  # Server is running
+
+    # Cleanup on shutdown
+    print("\n[SHUTDOWN] Stopping all trading runners...")
+    await stop_all_runners()
+    print("[SHUTDOWN] Server stopped")
+
+
+app = FastAPI(title="OIE MVP API", version="1.0.0", lifespan=lifespan)
 
 # Frontend static files
 FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
@@ -36,19 +118,6 @@ app.include_router(topology_router, prefix="/api/v1/topology", tags=["topology"]
 app.include_router(predictive_router, prefix="/api/v1/predictive", tags=["predictive"])
 app.include_router(signals_router, prefix="/api/v1/signals", tags=["signals"])
 app.include_router(trades_router, prefix="/api/v1/trades", tags=["trades"])
-
-# Live trading runner (lazy import to avoid errors if not configured)
-_live_runner = None
-
-def get_live_runner():
-    global _live_runner
-    if _live_runner is None:
-        try:
-            from backend.trading.live_runner import LiveTradingRunner
-            _live_runner = LiveTradingRunner(symbol="BTCUSDT", interval="1m")
-        except Exception as e:
-            print(f"Warning: Could not initialize live runner: {e}")
-    return _live_runner
 
 @app.get("/")
 async def serve_frontend():
@@ -160,24 +229,9 @@ async def serve_trades_css():
 # LIVE TRADING ENDPOINTS
 # ============================================
 
-# Supported symbols
-SUPPORTED_SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT"]
+# Supported symbols (same as AUTO_START_SYMBOLS)
+SUPPORTED_SYMBOLS = AUTO_START_SYMBOLS
 
-# Store runners for different symbol+timeframe combinations
-_runners = {}
-
-def get_runner(symbol: str = "BTCUSDT", interval: str = "1m"):
-    """Get or create runner for specific symbol and interval"""
-    global _runners
-    key = f"{symbol}_{interval}"
-    if key not in _runners:
-        try:
-            from backend.trading.live_runner import LiveTradingRunner
-            _runners[key] = LiveTradingRunner(symbol=symbol, interval=interval)
-        except Exception as e:
-            print(f"Warning: Could not initialize {key} runner: {e}")
-            return None
-    return _runners[key]
 
 def get_all_runners():
     """Get all active runners"""
